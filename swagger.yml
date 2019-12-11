@@ -1,0 +1,5084 @@
+openapi: 3.0.0
+info:
+  description: TD Ameritrade API
+  version: 3.0.1
+  title: TD Ameritrade API
+  termsOfService: https://developer.tdameritrade.com/legal
+  contact:
+    email: austin.millan@gmail.com
+paths:
+  "/accounts/{accountId}/orders/{orderId}":
+    delete:
+      tags:
+        - Accounts and Trading
+      summary: Cancel Order
+      description: "Cancel a specific order for a specific account. "
+      operationId: cancelOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: orderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "404":
+          description: An error message if the order was not found.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Accounts and Trading
+      summary: Replace Order
+      description: Replace an existing order for an account. The existing order will be
+        replaced by the new order. Once replaced, the old order will be canceled
+        and a new order will be created.
+      operationId: replaceOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: orderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      requestBody:
+        $ref: "#/components/requestBodies/Order"
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "404":
+          description: An error message if the order was not found.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Order
+      description: Get a specific order for a specific account.
+      operationId: getOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: orderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: A Order object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  "/accounts/{accountId}/orders":
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Orders By Path
+      description: Orders for a specific account.
+      operationId: getOrdersByPath
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: maxResults
+          in: query
+          description: The maximum number of orders to retrieve.
+          required: true
+          schema:
+            type: integer
+        - name: fromEnteredTime
+          in: query
+          description: Specifies that no orders entered before this time should be
+            returned. Valid ISO-8601 formats are  yyyy-MM-dd and
+            yyyy-MM-dd'T'HH:mm:ssz Date must be within 60 days from today's
+            date. 'toEnteredTime' must also be set.
+          required: true
+          schema:
+            type: string
+        - name: toEnteredTime
+          in: query
+          description: Specifies that no orders entered after this time should be
+            returned.Valid ISO-8601 formats are :yyyy-MM-dd and
+            yyyy-MM-dd'T'HH:mm:ssz. 'fromEnteredTime' must also be set.
+          required: true
+          schema:
+            type: string
+            format: string
+            maximum: 0
+        - name: status
+          in: query
+          description: The maximum number of orders to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      responses:
+        "200":
+          description: A Order object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Accounts and Trading
+      summary: Place Order
+      description: Place an order for a specific account.
+      operationId: placeOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+      requestBody:
+        $ref: "#/components/requestBodies/Order"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  /orders:
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Orders By Query
+      description: All orders for a specific account or, if account ID isn't specified,
+        orders will be returned for all linked accounts
+      operationId: getOrdersByQuery
+      parameters:
+        - name: accountId
+          in: query
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: maxResults
+          in: query
+          description: The maximum number of orders to retrieve.
+          required: true
+          schema:
+            type: integer
+        - name: fromEnteredTime
+          in: query
+          description: Specifies that no orders entered before this time should be
+            returned. Valid ISO-8601 formats are  yyyy-MM-dd and
+            yyyy-MM-dd'T'HH:mm:ssz Date must be within 60 days from today's
+            date. 'toEnteredTime' must also be set.
+          required: true
+          schema:
+            type: string
+        - name: toEnteredTime
+          in: query
+          description: Specifies that no orders entered after this time should be
+            returned.Valid ISO-8601 formats are :yyyy-MM-dd and
+            yyyy-MM-dd'T'HH:mm:ssz. 'fromEnteredTime' must also be set.
+          required: true
+          schema:
+            type: string
+            format: string
+            maximum: 0
+        - name: status
+          in: query
+          description: The maximum number of orders to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  "/accounts/{accountId}/savedorders":
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Saved Orders by Path
+      description: Saved orders for a specific account.
+      operationId: getSavedOrdersByPath
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+      responses:
+        "200":
+          description: A Order object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SavedOrder"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Accounts and Trading
+      summary: Create Saved Order
+      description: "Save an order for a specific account. "
+      operationId: saveOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: orderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedOrder"
+        description: The order to save.
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  "/accounts/{accountId}/savedorders/{savedOrderId}":
+    delete:
+      tags:
+        - Accounts and Trading
+      summary: Delete Saved Order
+      description: Delete a specific saved order for a specific account.
+      operationId: deleteSavedOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: savedOrderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Saved Order
+      description: Specific saved order by its ID, for a specific account.
+      operationId: getSavedOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: savedOrderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      responses:
+        "200":
+          description: A Order object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Accounts and Trading
+      summary: Replace Saved Order
+      description: Replace an existing saved order for an account. The existing saved order
+        will be replaced by the new order.
+      operationId: replaceSavedOrder
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+        - name: savedOrderId
+          in: path
+          description: Order Number
+          required: true
+          schema:
+            type: integer
+            format: int64
+            maximum: 0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedOrder"
+        description: The order to place.
+      responses:
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "404":
+          description: An error message if the order was not found.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  "/accounts/{accountId}":
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Account
+      description: Account balances, positions, and orders for a specific account.
+      operationId: getAccount
+      parameters:
+        - name: accountId
+          in: path
+          description: Account Number
+          required: true
+          schema:
+            type: integer
+            format: string
+      responses:
+        "200":
+          description: A Account Object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  /accounts:
+    get:
+      tags:
+        - Accounts and Trading
+      summary: Get Accounts
+      description: Account balances, positions, and orders for a specific account.
+      operationId: getAccounts
+      responses:
+        "200":
+          description: A Account Object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        "207":
+          description: Indicates there was a problem getting account data for one or more linked accounts, but the accounts who's data returned successfully is in the response. Do not aggregate balances and positions for this case.
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  /oath2/token:
+    post:
+      tags:
+        - Authentication
+      summary: Post Access Token
+      description: The token endpoint returns an access token along with an optional
+        refresh token.
+      operationId: postAccessToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EASObject"
+        description: The access token.
+      responses:
+        "200":
+          description: A EASObject Object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EASObject"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /instruments:
+    get:
+      tags:
+        - Instruments
+      summary: Search for instrument and fundamental data
+      description: Search or retrieve instrument data, including fundamental data.
+      operationId: searchInstruments
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: symbol
+          in: query
+          description: Value to pass to the search. See projection description for more information.
+          required: true
+          schema:
+            type: string
+        - name: projection 
+          in: query
+          description: "The type of request:symbol-search: Retrieve instrument data of a specific symbol or cusip\nsymbol-regex: Retrieve instrument data for all symbols matching regex. Example: symbol=XYZ.* will return all symbols beginning with XYZ\ndesc-search: Retrieve instrument data for instruments whose description contains the word supplied. Example: symbol=FakeCompany will return all instruments with FakeCompany in the description.\ndesc-regex: Search description with full regex support. Example: symbol=XYZ.[A-C] returns all instruments whose descriptions contain a word beginning with XYZ followed by a character A through C. \nfundamental: Returns fundamental data for a single instrument specified by exact symbol."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - properties:
+                      Bond:
+                        $ref: '#/components/schemas/Bond'
+                  - properties:
+                      FundamentalData:
+                        $ref: '#/components/schemas/FundamentalData'
+                  - properties:
+                      FundamentalData:
+                        $ref: '#/components/schemas/FundamentalData'
+                  - properties:
+                      Fundamental:
+                        $ref: '#/components/schemas/Fundamental'
+                  - properties:
+                      Instrument:
+                        $ref: '#/components/schemas/Instrument'
+        "400":
+          description: An error message indicating the caller must pass a non null value in the parameter.
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: An error message indicating the instrument for the symbol/cusip was not found.
+        "406":
+          description: An error message indicating an issue in the symbol regex, or number of symbols searched is over the maximum.
+      security:
+        - Bearer: []
+  /instruments/{accountId}:
+    get:
+      tags:
+        - Instruments
+      summary: Search for instrument and fundamental data
+      description: Search or retrieve instrument data, including fundamental data.
+      operationId: getInstrument
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - properties:
+                      Bond:
+                        $ref: '#/components/schemas/Bond'
+                  - properties:
+                      FundamentalData:
+                        $ref: '#/components/schemas/FundamentalData'
+                  - properties:
+                      FundamentalData:
+                        $ref: '#/components/schemas/FundamentalData'
+                  - properties:
+                      Fundamental:
+                        $ref: '#/components/schemas/Fundamental'
+                  - properties:
+                      Instrument:
+                        $ref: '#/components/schemas/Instrument'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: An error message indicating the instrument for the symbol/cusip was not found.
+      security:
+        - Bearer: []
+  /marketdata/hours:
+    get:
+      tags:
+        - Market Hours
+      summary: Operating hours of markets
+      description: Retrieve market hours for specified markets
+      operationId: getHours
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: markets
+          in: query
+          description: The markets for which you're requesting market hours, comma-separated. Valid markets are EQUITY, OPTION, FUTURE, BOND, or FOREX.
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: "The date for which market hours information is requested. Valid ISO-8601 formats are : yyyy-MM-dd and yyyy-MM-dd'T'HH:mm:ssz."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hours"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "404":
+          description: Not Found
+      security:
+        - Bearer: []
+  /marketdata/{market}/hours:
+    get:
+      tags:
+        - Market Hours
+      summary: Operating hours of markets
+      description: Retrieve market hours for specified single market
+      operationId: getMarketHours
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: market
+          in: path
+          description: The markets for which you're requesting market hours, comma-separated. Valid markets are EQUITY, OPTION, FUTURE, BOND, or FOREX.
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: "The date for which market hours information is requested. Valid ISO-8601 formats are : yyyy-MM-dd and yyyy-MM-dd'T'HH:mm:ssz."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hours"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "404":
+          description: Not Found
+      security:
+        - Bearer: []
+  /marketdata/{index}/movers:
+    get:
+      tags:
+        - Movers
+      summary: Retrieve mover information by index symbol, direction type and change
+      description: Top 10 (up or down) movers by value or percent for a particular market
+      operationId: getMovers
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: index
+          in: path
+          description: The index symbol to get movers from.
+          required: true
+          schema:
+            type: string
+        - name: direction
+          in: query
+          description: "To return movers with the specified directions of up or down."
+          required: true
+          schema:
+            type: string
+            example: "'up' or 'down'"
+        - name: change
+          in: query
+          description: "To return movers with the specified change types of percent or value."
+          required: true
+          schema:
+            type: string
+            example: "'percent' or 'value'"
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mover"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+        - Bearer: []
+        
+  /marketdata/chains:
+    get:
+      tags:
+        - Option Chains
+      summary: Get Option Chains for optionable symbols
+      description: Get option chain for an optionable Symbol
+      operationId: getOptionChains
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: symbol
+          in: query
+          description: Enter one symbol
+          required: true
+          schema:
+            type: string
+        - name: contractType
+          in: query
+          description: Type of contracts to return in the chain. Can be CALL, PUT, or ALL. Default is ALL.
+          required: true
+          schema:
+            type: string
+            example: "'CALL' or 'PUT' or 'ALL'"
+        - name: strikeCount
+          in: query
+          description: The number of strikes to return above and below the at-the-money price.
+          required: true
+          schema:
+            type: string
+        - name: includeQuotes
+          in: query
+          description: "Include quotes for options in the option chain. Can be TRUE or FALSE. Default is FALSE."
+          required: true
+          schema:
+            type: string
+            example: "'TRUE' or 'FALSE'"
+        - name: strategy
+          in: query
+          description: "Passing a value returns a Strategy Chain. Possible values are SINGLE, ANALYTICAL (allows use of the volatility, underlyingPrice, interestRate, and daysToExpiration params to calculate theoretical values), COVERED, VERTICAL, CALENDAR, STRANGLE, STRADDLE, BUTTERFLY, CONDOR, DIAGONAL, COLLAR, or ROLL. Default is SINGLE."
+          required: true
+          schema:
+            type: string
+            example: "'SINGLE' or 'ANALYTICAL' or 'underlyingPrice' or 'interestRate' or 'daysToExpiration' or 'COVERED' or 'VERTICAL' or 'CALENDAR' or 'STRANGLE' or 'STRADDLE' or 'BUTTERFLY' or 'CONDOR' or 'DIAGONAL' or 'COLLAR' or 'ROLL'."
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - properties:
+                      OptionChain:
+                        $ref: '#/components/schemas/OptionChain'
+                  - properties:
+                      StrikePriceMap:
+                        $ref: '#/components/schemas/StrikePriceMap'
+                  - properties:
+                      Option:
+                        $ref: '#/components/schemas/Option'
+                  - properties:
+                      Underlying:
+                        $ref: '#/components/schemas/Underlying'
+                  - properties:
+                      ExpirationDate:
+                        $ref: '#/components/schemas/ExpirationDate'
+                  - properties:
+                      OptionDeliverables:
+                        $ref: '#/components/schemas/OptionDeliverables'
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: An error message indicating internal error in the service.
+      security:
+        - Bearer: []
+        
+  /marketdata/{symbol}/pricehistory:
+    get:
+      tags:
+        - Price History
+      summary: Historical price data for charts
+      description: Get price history for a symbol
+      operationId: getPriceHistory
+      parameters:
+        - name: apikey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: symbol
+          in: path
+          description: Enter one symbol
+          required: true
+          schema:
+            type: string
+        - name: periodType
+          in: query
+          description: The type of period to show. Valid values are day, month, year, or ytd (year to date). Default is day.
+          required: true
+          schema:
+            type: string
+            example: "'day' or 'month' or 'year' or 'ytd'"
+        - name: period
+          in: query
+          description: "The number of periods to show.\n\nExample: For a 2 day / 1 min chart, the values would be:\nperiod: 2\nperiodType: day\nfrequency: 1\nfrequencyType: min\nValid periods by periodType (defaults marked with an asterisk):\nday: 1, 2, 3, 4, 5, 10*\nmonth: 1*, 2, 3, 6\nyear: 1*, 2, 3, 5, 10, 15, 20\nytd: 1*"
+          required: true
+          schema:
+            type: integer
+        - name: frequencyType
+          in: query
+          description: "The type of frequency with which a new candle is formed.\n\nValid frequencyTypes by periodType (defaults marked with an asterisk):\n\nday: minute*\nmonth: daily, weekly*\nyear: daily, weekly, monthly*\nytd: daily, weekly*\n"
+          required: true
+          schema:
+            type: string
+        - name: frequency
+          in: query
+          description: "The number of the frequencyType to be included in each candle.\n\nValid frequencies by frequencyType (defaults marked with an asterisk):\n\nminute: 1*, 5, 10, 15, 30\ndaily: 1*\nweekly: 1*\nmonthly: 1*\n"
+          required: true
+          schema:
+            type: integer
+        - name: endDate
+          in: query
+          description: "End date as milliseconds since epoch. If startDate and endDate are provided, period should not be provided. Default is previous trading day."
+          required: true
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: "Start date as milliseconds since epoch. If startDate and endDate are provided, period should not be provided."
+          required: true
+          schema:
+            type: string
+        - name: needExtendedHoursData
+          in: query
+          description: "true to return extended hours data, false for regular market hours only. Default is true"
+          required: true
+          schema:
+            type: boolean
+            example: "x"
+        - name: x
+          in: query
+          description: "x"
+          required: true
+          schema:
+            type: string
+            example: "x"
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CandleList"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "500":
+          description: Not Found
+      security:
+        - Bearer: []
+  /marketdata/{symbol}/quotes:
+    get:
+      tags:
+        - Quotes
+      summary: Search for instrument and fundamental data
+      description: Get quote for a symbol.
+      operationId: getQuote
+      parameters:
+        - name: symbol
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - properties:
+                      MutualFund:
+                        $ref: '#/components/schemas/MutualFund'
+                  - properties:
+                      FutureOptions:
+                        $ref: '#/components/schemas/FutureOptions'
+                  - properties:
+                      Option:
+                        $ref: '#/components/schemas/Option'
+                  - properties:
+                      Forex:
+                        $ref: '#/components/schemas/Forex'
+                  - properties:
+                      ETF:
+                        $ref: '#/components/schemas/ETF'
+                  - properties:
+                      Equity:
+                        $ref: '#/components/schemas/Equity'
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "404":
+          description: An error message indicating the instrument for the symbol/cusip was not found.
+      security:
+        - Bearer: []
+  /marketdata/quotes:
+    get:
+      tags:
+        - Quotes
+      summary: Search for instrument and fundamental data
+      description: Get quote for one or more symbols.
+      operationId: getQuotes
+      parameters:
+        - name: apiKey
+          in: query
+          description: API Key
+          required: true
+          schema:
+            type: string
+        - name: symbol
+          in: query
+          description: Symbol to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - properties:
+                      MutualFund:
+                        $ref: '#/components/schemas/MutualFund'
+                  - properties:
+                      FutureOptions:
+                        $ref: '#/components/schemas/FutureOptions'
+                  - properties:
+                      Option:
+                        $ref: '#/components/schemas/Option'
+                  - properties:
+                      Forex:
+                        $ref: '#/components/schemas/Forex'
+                  - properties:
+                      ETF:
+                        $ref: '#/components/schemas/ETF'
+                  - properties:
+                      Equity:
+                        $ref: '#/components/schemas/Equity'
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this page.
+        "404":
+          description: An error message indicating the instrument for the symbol/cusip was not found.
+        "406":
+          description: An error message indicating an issue in the symbol regex, or number of symbols searched is over the maximum.
+      security:
+        - Bearer: []
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
+      tags:
+        - Transaction History
+      summary: APIs to access transaction history on the account
+      description: Transaction for a specific account.
+      operationId: getTransaction
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: transactionId
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller doesn't have access to the account in the request.
+        "404":
+          description: An error message indicating the specified transaction could not be found.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /accounts/{accountId}/transactions:
+    get:
+      tags:
+        - Transaction History
+      summary: APIs to access transaction history on the account
+      description: Transactions for a specific account.
+      operationId: getTransactions
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Only transactions with the specified type will be returned.
+          required: true
+          schema:
+            type: string
+            example: "'ALL' or 'TRADE' or 'BUY_ONLY' or 'SELL_ONLY' or 'CASH_IN_OR_CASH_OUT' or 'CHECKING' or 'DIVIDEND' or 'INTEREST' or 'OTHER' or 'ADVISOR_FEES'"
+        - name: symbol
+          in: query
+          description: Only transactions with the specified symbol will be returned.
+          required: true
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: "Only transactions after the Start Date will be returned. Note: The maximum date range is one year. Valid ISO-8601 formats are: yyyy-MM-dd."
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: "Only transactions before the End Date will be returned. Note: The maximum date range is one year. Valid ISO-8601 formats are: yyyy-MM-dd."
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Instruments List
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transaction"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller doesn't have access to the account in the request.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /accounts/{accountId}/preferences:
+    get:
+      tags:
+        - User Info & Preferences
+      summary: APIs to access user-authorized accounts and their preferences
+      description: Preferences for a specific account.
+      operationId: getPreferences
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - User Info & Preferences
+      summary: APIs to access user-authorized accounts and their preferences
+      description: Update preferences for a specific account. Please note that the directOptionsRouting and directEquityRouting values cannot be modified via this operation
+      operationId: updatePreferences
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePreferences"
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "403":
+          description: An error message indicating the caller is forbidden from accessing this resource.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /userprincipals/streamersubscriptionkeys:
+    get:
+      tags:
+        - User Info & Preferences
+      summary: APIs to access user-authorized accounts and their preferences
+      description: SubscriptionKey for provided accounts or default accounts.
+      operationId: getStreamerSubscriptionKeys
+      parameters:
+        - name: accountIds
+          in: query
+          description: Account IDs
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionKey"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /userprincipals:
+    get:
+      tags:
+        - User Info & Preferences
+      summary: APIs to access user-authorized accounts and their preferences
+      description: User Principal details.
+      operationId: getUserPrincipals
+      parameters:
+        - name: fields
+          in: query
+          description: "A comma separated String which allows one to specify additional fields to return. None of these fields are returned by default. Possible values in this String can be: streamerSubscriptionKeys,\nstreamerConnectionInfo,\npreferences,\nsurrogateIds"
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              example: "fields=streamerSubscriptionKeys,streamerConnectionInfo"
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPrincipal"
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+        "503":
+          description: An error message indicating there is a temporary problem responding.
+      security:
+        - Bearer: []
+  /accounts/{accountId}/watchlists:
+    post:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: Create watchlist for specific account.This method does not verify that the symbol or asset type are valid.
+      operationId: createWatchlist
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWatchlist"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: All watchlists of an account.
+      operationId: getWatchlistSingleAccount
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+  /accounts/{accountId}/watchlists/{watchlistId}:
+    delete:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: Delete watchlist for a specific account. This method does not verify that the symbol or asset type are valid.
+      operationId: deleteWatchlist
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: watchlistId
+          in: path
+          description: Watchlist ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: Watchlist deleted.
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: Replace watchlist for specific account. This method does not verify that the symbol or asset type are valid.
+      operationId: replaceWatchlist
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: watchlistId
+          in: path
+          description: Watchlist ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWatchlist"
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: Watchlist updated.
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    patch:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: "Partially update watchlist for a specific account: change watchlist name, add to the beginning/end of a watchlist, update or delete items in a watchlist. This method does not verify that the symbol or asset type are valid."
+      operationId: updateWatchlist
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: watchlistId
+          in: path
+          description: Watchlist ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWatchlist"
+      responses:
+        "200":
+          description: OK
+        "204":
+          description: Watchlist updated.
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: Specific watchlist for a specific account.
+      operationId: getWatchlist
+      parameters:
+        - name: accountId
+          in: path
+          description: Account ID
+          required: true
+          schema:
+            type: string
+        - name: watchlistId
+          in: path
+          description: Watchlist ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+        "400":
+          description: An error message indicating the validation problem with the request.
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "404":
+          description: An error message indicating the account or the watchlist ID does not exist.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+
+  /accounts/watchlists:
+    get:
+      tags:
+        - Watchlist
+      summary: APIs to perform CRUD operations on Account Watchlist
+      description: All watchlists for all of the user's linked accounts.
+      operationId: getWatchlistMultipleAccounts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Watchlist'
+        "401":
+          description: An error message indicating the caller must pass a valid AuthToken
+            in the HTTP authorization request header.
+        "500":
+          description: An error message indicating there was an unexpected server error.
+      security:
+        - Bearer: []
+
+        
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://api.tdameritrade.com/v2
+  - url: http://api.tdameritrade.com/v2
+components:
+  requestBodies:
+    Order:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Order"
+      description: The order to place.
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    Order:
+      type: object
+      properties:
+        session:
+          type: string
+          example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+        duration:
+          type: string
+          example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+        orderType:
+          type: string
+          example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or 'TRAILING_STOP' or
+            'MARKET_ON_CLOSE' or 'EXERCISE' or 'TRAILING_STOP_LIMIT' or
+            'NET_DEBIT' or 'NET_CREDIT' or 'NET_ZERO'"
+        cancelTime:
+          type: object
+          properties:
+            date:
+              type: string
+              example: string
+            shortFormat:
+              type: boolean
+        complexOrderStrategyType:
+          type: string
+          example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or 'CALENDAR' or
+            'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or 'COLLAR_SYNTHETIC' or
+            'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR' or 'VERTICAL_ROLL' or
+            'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL' or 'UNBALANCED_BUTTERFLY'
+            or 'UNBALANCED_CONDOR' or 'UNBALANCED_IRON_CONDOR' or
+            'UNBALANCED_VERTICAL_ROLL' or 'CUSTOM'"
+        quantity:
+          type: number
+          example: 0
+        filledQuantity:
+          type: number
+          example: 0
+        remainingQuantity:
+          type: number
+          example: 0
+        requestedDestination:
+          type: string
+          example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE' or
+            'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+        destinationLinkName:
+          type: string
+          example: string
+        releaseTime:
+          type: string
+          example: string
+        stopPrice:
+          type: number
+          example: 0
+        stopPriceLinkBasis:
+          type: string
+          example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+            'ASK_BID' or 'MARK' or 'AVERAGE'"
+        stopPriceLinkType:
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'TICK'"
+        stopPriceOffset:
+          type: number
+          example: 0
+        stopType:
+          type: string
+          example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+        priceLinkBasis:
+          type: string
+          example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+            'ASK_BID' or 'MARK' or 'AVERAGE'"
+        priceLinkType:
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'TICK'"
+        price:
+          type: number
+          example: 0
+        taxLotMethod:
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'AVERAGE_COST' or
+            'SPECIFIC_LOT'"
+        orderLegCollection:
+          type: array
+          items:
+            type: object
+            properties:
+              orderLegType:
+                type: string
+                example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                  'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+              legId:
+                type: number
+                example: 0
+              instrument:
+                type: string
+                example: The type  has the following subclasses [Option
+                  MutualFund CashEquivalent Equity FixedIncome] descriptions are
+                  listed below
+              instruction:
+                type: string
+                example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                  'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                  'SELL_TO_CLOSE' or 'EXCHANGE'"
+              positionEffect:
+                type: string
+                example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+              quantity:
+                type: number
+                example: 0
+              quantityType:
+                type: string
+                example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+        activationPrice:
+          type: number
+          example: 0
+        specialInstruction:
+          type: string
+          example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or 'ALL_OR_NONE_DO_NOT_REDUCE'"
+        orderStrategyType:
+          type: string
+          example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+        orderId:
+          type: number
+          example: 0
+        cancelable:
+          type: boolean
+        editable:
+          type: boolean
+        status:
+          type: string
+          example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+            'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+            'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+            'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or 'REPLACED' or
+            'FILLED' or 'EXPIRED'"
+        enteredTime:
+          type: string
+          example: string
+        closeTime:
+          type: string
+          example: string
+        tag:
+          type: string
+          example: string
+        accountId:
+          type: number
+          example: 0
+        orderActivityCollection:
+          type: array
+          items:
+            $ref: "#/components/schemas/Execution"
+        replacingOrderCollection:
+          type: array
+          items:
+            type: object
+        childOrderStrategies:
+          type: array
+          items:
+            type: object
+            properties:
+              session:
+                type: string
+                example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+              duration:
+                type: string
+                example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+              orderType:
+                type: string
+                example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or
+                  'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'EXERCISE' or
+                  'TRAILING_STOP_LIMIT' or 'NET_DEBIT' or 'NET_CREDIT' or
+                  'NET_ZERO'"
+              cancelTime:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    example: string
+                  shortFormat:
+                    type: boolean
+              complexOrderStrategyType:
+                type: string
+                example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or
+                  'CALENDAR' or 'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or
+                  'COLLAR_SYNTHETIC' or 'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR'
+                  or 'VERTICAL_ROLL' or 'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL'
+                  or 'UNBALANCED_BUTTERFLY' or 'UNBALANCED_CONDOR' or
+                  'UNBALANCED_IRON_CONDOR' or 'UNBALANCED_VERTICAL_ROLL' or
+                  'CUSTOM'"
+              quantity:
+                type: number
+                example: 0
+              filledQuantity:
+                type: number
+                example: 0
+              remainingQuantity:
+                type: number
+                example: 0
+              requestedDestination:
+                type: string
+                example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE'
+                  or 'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+              destinationLinkName:
+                type: string
+                example: string
+              releaseTime:
+                type: string
+                example: string
+              stopPrice:
+                type: number
+                example: 0
+              stopPriceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              stopPriceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              stopPriceOffset:
+                type: number
+                example: 0
+              stopType:
+                type: string
+                example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+              priceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              priceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              price:
+                type: number
+                example: 0
+              taxLotMethod:
+                type: string
+                example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                  'AVERAGE_COST' or 'SPECIFIC_LOT'"
+        statusDescription:
+          type: string
+          example: string
+    Option:
+      type: object
+      properties:
+        assetType:
+          type: string
+          example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+            'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        type:
+          type: string
+          example: "'VANILLA' or 'BINARY' or 'BARRIER'"
+        putCall:
+          type: string
+          example: "'PUT' or 'CALL'"
+        underlyingSymbol:
+          type: string
+          example: string
+        optionMultiplier:
+          type: number
+          example: 0
+        optionDeliverables:
+          type: array
+          items:
+            type: object
+            properties:
+              symbol:
+                type: string
+                example: string
+              deliverableUnits:
+                type: number
+                example: 0
+              currencyType:
+                type: string
+                example: "'USD' or 'CAD' or 'EUR' or 'JPY'"
+              assetType:
+                type: string
+                example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                  'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+    MutualFund:
+      type: object
+      properties:
+        assetType:
+          type: string
+          example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+            'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        type:
+          type: string
+          example: "'NOT_APPLICABLE' or 'OPEN_END_NON_TAXABLE' or 'OPEN_END_TAXABLE' or
+            'NO_LOAD_NON_TAXABLE' or 'NO_LOAD_TAXABLE'"
+    CashEquivalent:
+      type: object
+      properties:
+        assetType:
+          type: string
+          example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+            'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        type:
+          type: string
+          example: "'SAVINGS' or 'MONEY_MARKET_FUND'"
+    Equity:
+      type: object
+      properties:
+        assetType:
+          type: string
+          example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+            'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+    FixedIncome:
+      type: object
+      properties:
+        assetType:
+          type: string
+          example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+            'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        maturityDate:
+          type: string
+          example: string
+        variableRate:
+          type: number
+          example: 0
+        factor:
+          type: number
+          example: 0
+    Execution:
+      type: object
+      properties:
+        activityType:
+          type: string
+          example: "'EXECUTION' or 'ORDER_ACTION'"
+        executionType:
+          type: string
+          example: FILL
+        quantity:
+          type: number
+          example: 0
+        orderRemainingQuantity:
+          type: number
+          example: 0
+        executionLegs:
+          type: array
+          items:
+            type: object
+            properties:
+              legId:
+                type: number
+                example: 0
+              quantity:
+                type: number
+                example: 0
+              mismarkedQuantity:
+                type: number
+                example: 0
+              price:
+                type: number
+                example: 0
+              time:
+                type: string
+                example: string
+    SavedOrder:
+      type: object
+      properties:
+        session:
+          type: string
+          example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+        duration:
+          type: string
+          example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+        orderType:
+          type: string
+          example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or 'TRAILING_STOP' or
+            'MARKET_ON_CLOSE' or 'EXERCISE' or 'TRAILING_STOP_LIMIT' or
+            'NET_DEBIT' or 'NET_CREDIT' or 'NET_ZERO'"
+        cancelTime:
+          type: object
+          properties:
+            date:
+              type: string
+              example: string
+            shortFormat:
+              type: boolean
+        complexOrderStrategyType:
+          type: string
+          example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or 'CALENDAR' or
+            'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or 'COLLAR_SYNTHETIC' or
+            'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR' or 'VERTICAL_ROLL' or
+            'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL' or 'UNBALANCED_BUTTERFLY'
+            or 'UNBALANCED_CONDOR' or 'UNBALANCED_IRON_CONDOR' or
+            'UNBALANCED_VERTICAL_ROLL' or 'CUSTOM'"
+        quantity:
+          type: number
+          example: 0
+        filledQuantity:
+          type: number
+          example: 0
+        remainingQuantity:
+          type: number
+          example: 0
+        requestedDestination:
+          type: string
+          example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE' or
+            'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+        destinationLinkName:
+          type: string
+          example: string
+        releaseTime:
+          type: string
+          example: string
+        stopPrice:
+          type: number
+          example: 0
+        stopPriceLinkBasis:
+          type: string
+          example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+            'ASK_BID' or 'MARK' or 'AVERAGE'"
+        stopPriceLinkType:
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'TICK'"
+        stopPriceOffset:
+          type: number
+          example: 0
+        stopType:
+          type: string
+          example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+        priceLinkBasis:
+          type: string
+          example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+            'ASK_BID' or 'MARK' or 'AVERAGE'"
+        priceLinkType:
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'TICK'"
+        price:
+          type: number
+          example: 0
+        taxLotMethod:
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'AVERAGE_COST' or
+            'SPECIFIC_LOT'"
+        orderLegCollection:
+          type: array
+          items:
+            type: object
+            properties:
+              orderLegType:
+                type: string
+                example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                  'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+              legId:
+                type: number
+                example: 0
+              instrument:
+                type: string
+                example: The type  has the following subclasses [Option
+                  MutualFund CashEquivalent Equity FixedIncome] descriptions are
+                  listed below
+              instruction:
+                type: string
+                example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                  'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                  'SELL_TO_CLOSE' or 'EXCHANGE'"
+              positionEffect:
+                type: string
+                example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+              quantity:
+                type: number
+                example: 0
+              quantityType:
+                type: string
+                example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+        activationPrice:
+          type: number
+          example: 0
+        specialInstruction:
+          type: string
+          example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or 'ALL_OR_NONE_DO_NOT_REDUCE'"
+        orderStrategyType:
+          type: string
+          example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+        orderId:
+          type: number
+          example: 0
+        cancelable:
+          type: boolean
+        editable:
+          type: boolean
+        status:
+          type: string
+          example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+            'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+            'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+            'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or 'REPLACED' or
+            'FILLED' or 'EXPIRED'"
+        enteredTime:
+          type: string
+          example: string
+        closeTime:
+          type: string
+          example: string
+        tag:
+          type: string
+          example: string
+        accountId:
+          type: number
+          example: 0
+        orderActivityCollection:
+          type: array
+          items:
+            type: string
+            example: The type  has the following subclasses [Execution]
+              descriptions are listed below
+        childOrderStrategies:
+          type: array
+          items:
+            type: object
+            properties:
+              session:
+                type: string
+                example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+              duration:
+                type: string
+                example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+              orderType:
+                type: string
+                example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or
+                  'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'EXERCISE' or
+                  'TRAILING_STOP_LIMIT' or 'NET_DEBIT' or 'NET_CREDIT' or
+                  'NET_ZERO'"
+              cancelTime:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    example: string
+                  shortFormat:
+                    type: boolean
+              complexOrderStrategyType:
+                type: string
+                example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or
+                  'CALENDAR' or 'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or
+                  'COLLAR_SYNTHETIC' or 'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR'
+                  or 'VERTICAL_ROLL' or 'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL'
+                  or 'UNBALANCED_BUTTERFLY' or 'UNBALANCED_CONDOR' or
+                  'UNBALANCED_IRON_CONDOR' or 'UNBALANCED_VERTICAL_ROLL' or
+                  'CUSTOM'"
+              quantity:
+                type: number
+                example: 0
+              filledQuantity:
+                type: number
+                example: 0
+              remainingQuantity:
+                type: number
+                example: 0
+              requestedDestination:
+                type: string
+                example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE'
+                  or 'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+              destinationLinkName:
+                type: string
+                example: string
+              releaseTime:
+                type: string
+                example: string
+              stopPrice:
+                type: number
+                example: 0
+              stopPriceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              stopPriceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              stopPriceOffset:
+                type: number
+                example: 0
+              stopType:
+                type: string
+                example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+              priceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              priceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              price:
+                type: number
+                example: 0
+              taxLotMethod:
+                type: string
+                example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                  'AVERAGE_COST' or 'SPECIFIC_LOT'"
+              orderLegCollection:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderLegType:
+                      type: string
+                      example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                        'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+                    legId:
+                      type: number
+                      example: 0
+                    instrument:
+                      type: string
+                      example: The type  has the following subclasses
+                        [Option MutualFund CashEquivalent Equity FixedIncome]
+                        descriptions are listed below
+                    instruction:
+                      type: string
+                      example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                        'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                        'SELL_TO_CLOSE' or 'EXCHANGE'"
+                    positionEffect:
+                      type: string
+                      example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+                    quantity:
+                      type: number
+                      example: 0
+                    quantityType:
+                      type: string
+                      example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+              activationPrice:
+                type: number
+                example: 0
+              specialInstruction:
+                type: string
+                example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or
+                  'ALL_OR_NONE_DO_NOT_REDUCE'"
+              orderStrategyType:
+                type: string
+                example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+              orderId:
+                type: number
+                example: 0
+              cancelable:
+                type: boolean
+              editable:
+                type: boolean
+              status:
+                type: string
+                example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+                  'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+                  'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+                  'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or
+                  'REPLACED' or 'FILLED' or 'EXPIRED'"
+              enteredTime:
+                type: string
+                example: string
+              closeTime:
+                type: string
+                example: string
+              tag:
+                type: string
+                example: string
+              accountId:
+                type: number
+                example: 0
+              orderActivityCollection:
+                type: array
+                items:
+                  type: string
+                  example: The type  has the following subclasses
+                    [Execution] descriptions are listed below
+              replacingOrderCollection:
+                type: array
+                items:
+                  type: object
+        statusDescription:
+          type: string
+          example: string
+        savedOrderId:
+          type: number
+          example: 0
+        savedTime:
+          type: string
+          example: string
+    Account:
+      type: object
+      properties:
+        securitiesAccount:
+          type: string
+          example: The type  has the following subclasses
+            [CashAccount MarginAccount] descriptions are listed below
+    CashAccount:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "'CASH' or 'MARGIN'"
+        accountId:
+          type: string
+          example: string
+        roundTrips:
+          type: number
+          example: 0
+        isDayTrader:
+          type: boolean
+        isClosingOnlyRestricted:
+          type: boolean
+        positions:
+          type: array
+          items:
+            type: object
+            properties:
+              shortQuantity:
+                type: number
+                example: 0
+              averagePrice:
+                type: number
+                example: 0
+              currentDayProfitLoss:
+                type: number
+                example: 0
+              currentDayProfitLossPercentage:
+                type: number
+                example: 0
+              longQuantity:
+                type: number
+                example: 0
+              settledLongQuantity:
+                type: number
+                example: 0
+              settledShortQuantity:
+                type: number
+                example: 0
+              agedQuantity:
+                type: number
+                example: 0
+              instrument:
+                type: string
+                example: The type  has the following subclasses [Option
+                  MutualFund CashEquivalent Equity FixedIncome] descriptions are
+                  listed below
+              marketValue:
+                type: number
+                example: 0
+        orderStrategies:
+          type: array
+          items:
+            type: object
+            properties:
+              session:
+                type: string
+                example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+              duration:
+                type: string
+                example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+              orderType:
+                type: string
+                example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or
+                  'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'EXERCISE' or
+                  'TRAILING_STOP_LIMIT' or 'NET_DEBIT' or 'NET_CREDIT' or
+                  'NET_ZERO'"
+              cancelTime:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    example: string
+                  shortFormat:
+                    type: boolean
+              complexOrderStrategyType:
+                type: string
+                example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or
+                  'CALENDAR' or 'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or
+                  'COLLAR_SYNTHETIC' or 'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR'
+                  or 'VERTICAL_ROLL' or 'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL'
+                  or 'UNBALANCED_BUTTERFLY' or 'UNBALANCED_CONDOR' or
+                  'UNBALANCED_IRON_CONDOR' or 'UNBALANCED_VERTICAL_ROLL' or
+                  'CUSTOM'"
+              quantity:
+                type: number
+                example: 0
+              filledQuantity:
+                type: number
+                example: 0
+              remainingQuantity:
+                type: number
+                example: 0
+              requestedDestination:
+                type: string
+                example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE'
+                  or 'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+              destinationLinkName:
+                type: string
+                example: string
+              releaseTime:
+                type: string
+                example: string
+              stopPrice:
+                type: number
+                example: 0
+              stopPriceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              stopPriceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              stopPriceOffset:
+                type: number
+                example: 0
+              stopType:
+                type: string
+                example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+              priceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              priceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              price:
+                type: number
+                example: 0
+              taxLotMethod:
+                type: string
+                example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                  'AVERAGE_COST' or 'SPECIFIC_LOT'"
+              orderLegCollection:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderLegType:
+                      type: string
+                      example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                        'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+                    legId:
+                      type: number
+                      example: 0
+                    instrument:
+                      type: string
+                      example: The type  has the following subclasses
+                        [Option MutualFund CashEquivalent Equity FixedIncome]
+                        descriptions are listed below
+                    instruction:
+                      type: string
+                      example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                        'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                        'SELL_TO_CLOSE' or 'EXCHANGE'"
+                    positionEffect:
+                      type: string
+                      example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+                    quantity:
+                      type: number
+                      example: 0
+                    quantityType:
+                      type: string
+                      example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+              activationPrice:
+                type: number
+                example: 0
+              specialInstruction:
+                type: string
+                example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or
+                  'ALL_OR_NONE_DO_NOT_REDUCE'"
+              orderStrategyType:
+                type: string
+                example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+              orderId:
+                type: number
+                example: 0
+              cancelable:
+                type: boolean
+              editable:
+                type: boolean
+              status:
+                type: string
+                example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+                  'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+                  'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+                  'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or
+                  'REPLACED' or 'FILLED' or 'EXPIRED'"
+              enteredTime:
+                type: string
+                example: string
+              closeTime:
+                type: string
+                example: string
+              tag:
+                type: string
+                example: string
+              accountId:
+                type: number
+                example: 0
+              orderActivityCollection:
+                type: array
+                items:
+                  type: string
+                  example: The type  has the following subclasses
+                    [Execution] descriptions are listed below
+              replacingOrderCollection:
+                type: array
+                items:
+                  type: object
+              childOrderStrategies:
+                type: array
+                items:
+                  type: object
+              statusDescription:
+                type: string
+                example: string
+        initialBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            cashAvailableForTrading:
+              type: number
+              example: 0
+            cashAvailableForWithdrawal:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            longStockValue:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            shortStockValue:
+              type: number
+              example: 0
+            isInCall:
+              type: boolean
+            unsettledCash:
+              type: number
+              example: 0
+            cashDebitCallValue:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            accountValue:
+              type: number
+              example: 0
+        currentBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longMarketValue:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            savings:
+              type: number
+              example: 0
+            shortMarketValue:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            cashAvailableForTrading:
+              type: number
+              example: 0
+            cashAvailableForWithdrawal:
+              type: number
+              example: 0
+            cashCall:
+              type: number
+              example: 0
+            longNonMarginableMarketValue:
+              type: number
+              example: 0
+            totalCash:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            cashDebitCallValue:
+              type: number
+              example: 0
+            unsettledCash:
+              type: number
+              example: 0
+        projectedBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longMarketValue:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            savings:
+              type: number
+              example: 0
+            shortMarketValue:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            cashAvailableForTrading:
+              type: number
+              example: 0
+            cashAvailableForWithdrawal:
+              type: number
+              example: 0
+            cashCall:
+              type: number
+              example: 0
+            longNonMarginableMarketValue:
+              type: number
+              example: 0
+            totalCash:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            cashDebitCallValue:
+              type: number
+              example: 0
+            unsettledCash:
+              type: number
+              example: 0
+    MarginAccount:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "'CASH' or 'MARGIN'"
+        accountId:
+          type: string
+          example: string
+        roundTrips:
+          type: number
+          example: 0
+        isDayTrader:
+          type: boolean
+        isClosingOnlyRestricted:
+          type: boolean
+        positions:
+          type: array
+          items:
+            type: object
+            properties:
+              shortQuantity:
+                type: number
+                example: 0
+              averagePrice:
+                type: number
+                example: 0
+              currentDayProfitLoss:
+                type: number
+                example: 0
+              currentDayProfitLossPercentage:
+                type: number
+                example: 0
+              longQuantity:
+                type: number
+                example: 0
+              settledLongQuantity:
+                type: number
+                example: 0
+              settledShortQuantity:
+                type: number
+                example: 0
+              agedQuantity:
+                type: number
+                example: 0
+              instrument:
+                type: string
+                example: The type  has the following subclasses [Option
+                  MutualFund CashEquivalent Equity FixedIncome] descriptions are
+                  listed below
+              marketValue:
+                type: number
+                example: 0
+        orderStrategies:
+          type: array
+          items:
+            type: object
+            properties:
+              session:
+                type: string
+                example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+              duration:
+                type: string
+                example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+              orderType:
+                type: string
+                example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or
+                  'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'EXERCISE' or
+                  'TRAILING_STOP_LIMIT' or 'NET_DEBIT' or 'NET_CREDIT' or
+                  'NET_ZERO'"
+              cancelTime:
+                type: object
+                properties:
+                  date:
+                    type: string
+                    example: string
+                  shortFormat:
+                    type: boolean
+              complexOrderStrategyType:
+                type: string
+                example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or
+                  'CALENDAR' or 'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or
+                  'COLLAR_SYNTHETIC' or 'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR'
+                  or 'VERTICAL_ROLL' or 'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL'
+                  or 'UNBALANCED_BUTTERFLY' or 'UNBALANCED_CONDOR' or
+                  'UNBALANCED_IRON_CONDOR' or 'UNBALANCED_VERTICAL_ROLL' or
+                  'CUSTOM'"
+              quantity:
+                type: number
+                example: 0
+              filledQuantity:
+                type: number
+                example: 0
+              remainingQuantity:
+                type: number
+                example: 0
+              requestedDestination:
+                type: string
+                example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE'
+                  or 'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+              destinationLinkName:
+                type: string
+                example: string
+              releaseTime:
+                type: string
+                example: string
+              stopPrice:
+                type: number
+                example: 0
+              stopPriceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              stopPriceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              stopPriceOffset:
+                type: number
+                example: 0
+              stopType:
+                type: string
+                example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+              priceLinkBasis:
+                type: string
+                example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK'
+                  or 'ASK_BID' or 'MARK' or 'AVERAGE'"
+              priceLinkType:
+                type: string
+                example: "'VALUE' or 'PERCENT' or 'TICK'"
+              price:
+                type: number
+                example: 0
+              taxLotMethod:
+                type: string
+                example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                  'AVERAGE_COST' or 'SPECIFIC_LOT'"
+              orderLegCollection:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderLegType:
+                      type: string
+                      example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                        'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+                    legId:
+                      type: number
+                      example: 0
+                    instrument:
+                      type: string
+                      example: The type  has the following subclasses
+                        [Option MutualFund CashEquivalent Equity FixedIncome]
+                        descriptions are listed below
+                    instruction:
+                      type: string
+                      example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                        'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                        'SELL_TO_CLOSE' or 'EXCHANGE'"
+                    positionEffect:
+                      type: string
+                      example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+                    quantity:
+                      type: number
+                      example: 0
+                    quantityType:
+                      type: string
+                      example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+              activationPrice:
+                type: number
+                example: 0
+              specialInstruction:
+                type: string
+                example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or
+                  'ALL_OR_NONE_DO_NOT_REDUCE'"
+              orderStrategyType:
+                type: string
+                example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+              orderId:
+                type: number
+                example: 0
+              cancelable:
+                type: boolean
+              editable:
+                type: boolean
+              status:
+                type: string
+                example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+                  'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+                  'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+                  'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or
+                  'REPLACED' or 'FILLED' or 'EXPIRED'"
+              enteredTime:
+                type: string
+                example: string
+              closeTime:
+                type: string
+                example: string
+              tag:
+                type: string
+                example: string
+              accountId:
+                type: number
+                example: 0
+              orderActivityCollection:
+                type: array
+                items:
+                  type: string
+                  example: The type  has the following subclasses
+                    [Execution] descriptions are listed below
+              replacingOrderCollection:
+                type: array
+                items:
+                  type: object
+              childOrderStrategies:
+                type: array
+                items:
+                  type: object
+              statusDescription:
+                type: string
+                example: string
+        initialBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            availableFundsNonMarginableTrade:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            buyingPower:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            cashAvailableForTrading:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            dayTradingBuyingPower:
+              type: number
+              example: 0
+            dayTradingBuyingPowerCall:
+              type: number
+              example: 0
+            dayTradingEquityCall:
+              type: number
+              example: 0
+            equity:
+              type: number
+              example: 0
+            equityPercentage:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longMarginValue:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            longStockValue:
+              type: number
+              example: 0
+            maintenanceCall:
+              type: number
+              example: 0
+            maintenanceRequirement:
+              type: number
+              example: 0
+            margin:
+              type: number
+              example: 0
+            marginEquity:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            regTCall:
+              type: number
+              example: 0
+            shortMarginValue:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            shortStockValue:
+              type: number
+              example: 0
+            totalCash:
+              type: number
+              example: 0
+            isInCall:
+              type: boolean
+            unsettledCash:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            marginBalance:
+              type: number
+              example: 0
+            shortBalance:
+              type: number
+              example: 0
+            accountValue:
+              type: number
+              example: 0
+        currentBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longMarketValue:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            savings:
+              type: number
+              example: 0
+            shortMarketValue:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            availableFunds:
+              type: number
+              example: 0
+            availableFundsNonMarginableTrade:
+              type: number
+              example: 0
+            buyingPower:
+              type: number
+              example: 0
+            buyingPowerNonMarginableTrade:
+              type: number
+              example: 0
+            dayTradingBuyingPower:
+              type: number
+              example: 0
+            dayTradingBuyingPowerCall:
+              type: number
+              example: 0
+            equity:
+              type: number
+              example: 0
+            equityPercentage:
+              type: number
+              example: 0
+            longMarginValue:
+              type: number
+              example: 0
+            maintenanceCall:
+              type: number
+              example: 0
+            maintenanceRequirement:
+              type: number
+              example: 0
+            marginBalance:
+              type: number
+              example: 0
+            regTCall:
+              type: number
+              example: 0
+            shortBalance:
+              type: number
+              example: 0
+            shortMarginValue:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            sma:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            isInCall:
+              type: boolean
+            stockBuyingPower:
+              type: number
+              example: 0
+            optionBuyingPower:
+              type: number
+              example: 0
+        projectedBalances:
+          type: object
+          properties:
+            accruedInterest:
+              type: number
+              example: 0
+            cashBalance:
+              type: number
+              example: 0
+            cashReceipts:
+              type: number
+              example: 0
+            longOptionMarketValue:
+              type: number
+              example: 0
+            liquidationValue:
+              type: number
+              example: 0
+            longMarketValue:
+              type: number
+              example: 0
+            moneyMarketFund:
+              type: number
+              example: 0
+            savings:
+              type: number
+              example: 0
+            shortMarketValue:
+              type: number
+              example: 0
+            pendingDeposits:
+              type: number
+              example: 0
+            availableFunds:
+              type: number
+              example: 0
+            availableFundsNonMarginableTrade:
+              type: number
+              example: 0
+            buyingPower:
+              type: number
+              example: 0
+            buyingPowerNonMarginableTrade:
+              type: number
+              example: 0
+            dayTradingBuyingPower:
+              type: number
+              example: 0
+            dayTradingBuyingPowerCall:
+              type: number
+              example: 0
+            equity:
+              type: number
+              example: 0
+            equityPercentage:
+              type: number
+              example: 0
+            longMarginValue:
+              type: number
+              example: 0
+            maintenanceCall:
+              type: number
+              example: 0
+            maintenanceRequirement:
+              type: number
+              example: 0
+            marginBalance:
+              type: number
+              example: 0
+            regTCall:
+              type: number
+              example: 0
+            shortBalance:
+              type: number
+              example: 0
+            shortMarginValue:
+              type: number
+              example: 0
+            shortOptionMarketValue:
+              type: number
+              example: 0
+            sma:
+              type: number
+              example: 0
+            mutualFundValue:
+              type: number
+              example: 0
+            bondValue:
+              type: number
+              example: 0
+            isInCall:
+              type: boolean
+            stockBuyingPower:
+              type: number
+              example: 0
+            optionBuyingPower:
+              type: number
+              example: 0
+    EASObject:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: string
+        refresh_token:
+          type: string
+          example: string
+        token_type:
+          type: string
+          example: string
+        expires_in:
+          type: number
+          example: 0
+        scope:
+          type: string
+          example: string
+        refresh_token_expires_in:
+          type: number
+          example: 0
+    OrderCollection:
+      type: array
+      items:
+        type: object
+        properties:
+          session:
+            type: string
+            example: "'NORMAL' or 'AM' or 'PM' or 'SEAMLESS'"
+          duration:
+            type: string
+            example: "'DAY' or 'GOOD_TILL_CANCEL' or 'FILL_OR_KILL'"
+          orderType:
+            type: string
+            example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or 'TRAILING_STOP'
+              or 'MARKET_ON_CLOSE' or 'EXERCISE' or 'TRAILING_STOP_LIMIT' or
+              'NET_DEBIT' or 'NET_CREDIT' or 'NET_ZERO'"
+          cancelTime:
+            type: object
+            properties:
+              date:
+                type: string
+                example: string
+              shortFormat:
+                type: boolean
+          complexOrderStrategyType:
+            type: string
+            example: "'NONE' or 'COVERED' or 'VERTICAL' or 'BACK_RATIO' or 'CALENDAR'
+              or 'DIAGONAL' or 'STRADDLE' or 'STRANGLE' or 'COLLAR_SYNTHETIC' or
+              'BUTTERFLY' or 'CONDOR' or 'IRON_CONDOR' or 'VERTICAL_ROLL' or
+              'COLLAR_WITH_STOCK' or 'DOUBLE_DIAGONAL' or 'UNBALANCED_BUTTERFLY'
+              or 'UNBALANCED_CONDOR' or 'UNBALANCED_IRON_CONDOR' or
+              'UNBALANCED_VERTICAL_ROLL' or 'CUSTOM'"
+          quantity:
+            type: number
+            example: 0
+          filledQuantity:
+            type: number
+            example: 0
+          remainingQuantity:
+            type: number
+            example: 0
+          requestedDestination:
+            type: string
+            example: "'INET' or 'ECN_ARCA' or 'CBOE' or 'AMEX' or 'PHLX' or 'ISE' or
+              'BOX' or 'NYSE' or 'NASDAQ' or 'BATS' or 'C2' or 'AUTO'"
+          destinationLinkName:
+            type: string
+            example: string
+          releaseTime:
+            type: string
+            example: string
+          stopPrice:
+            type: number
+            example: 0
+          stopPriceLinkBasis:
+            type: string
+            example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+              'ASK_BID' or 'MARK' or 'AVERAGE'"
+          stopPriceLinkType:
+            type: string
+            example: "'VALUE' or 'PERCENT' or 'TICK'"
+          stopPriceOffset:
+            type: number
+            example: 0
+          stopType:
+            type: string
+            example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
+          priceLinkBasis:
+            type: string
+            example: "'MANUAL' or 'BASE' or 'TRIGGER' or 'LAST' or 'BID' or 'ASK' or
+              'ASK_BID' or 'MARK' or 'AVERAGE'"
+          priceLinkType:
+            type: string
+            example: "'VALUE' or 'PERCENT' or 'TICK'"
+          price:
+            type: number
+            example: 0
+          taxLotMethod:
+            type: string
+            example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'AVERAGE_COST'
+              or 'SPECIFIC_LOT'"
+          orderLegCollection:
+            type: array
+            items:
+              type: object
+              properties:
+                orderLegType:
+                  type: string
+                  example: "'EQUITY' or 'OPTION' or 'INDEX' or 'MUTUAL_FUND' or
+                    'CASH_EQUIVALENT' or 'FIXED_INCOME' or 'CURRENCY'"
+                legId:
+                  type: number
+                  example: 0
+                instrument:
+                  type: string
+                  example: The type  has the following subclasses [Option
+                    MutualFund CashEquivalent Equity FixedIncome] descriptions
+                    are listed below
+                instruction:
+                  type: string
+                  example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                    'BUY_TO_OPEN' or 'BUY_TO_CLOSE' or 'SELL_TO_OPEN' or
+                    'SELL_TO_CLOSE' or 'EXCHANGE'"
+                positionEffect:
+                  type: string
+                  example: "'OPENING' or 'CLOSING' or 'AUTOMATIC'"
+                quantity:
+                  type: number
+                  example: 0
+                quantityType:
+                  type: string
+                  example: "'ALL_SHARES' or 'DOLLARS' or 'SHARES'"
+          activationPrice:
+            type: number
+            example: 0
+          specialInstruction:
+            type: string
+            example: "'ALL_OR_NONE' or 'DO_NOT_REDUCE' or 'ALL_OR_NONE_DO_NOT_REDUCE'"
+          orderStrategyType:
+            type: string
+            example: "'SINGLE' or 'OCO' or 'TRIGGER'"
+          orderId:
+            type: number
+            example: 0
+          cancelable:
+            type: boolean
+          editable:
+            type: boolean
+          status:
+            type: string
+            example: "'AWAITING_PARENT_ORDER' or 'AWAITING_CONDITION' or
+              'AWAITING_MANUAL_REVIEW' or 'ACCEPTED' or 'AWAITING_UR_OUT' or
+              'PENDING_ACTIVATION' or 'QUEUED' or 'WORKING' or 'REJECTED' or
+              'PENDING_CANCEL' or 'CANCELED' or 'PENDING_REPLACE' or 'REPLACED'
+              or 'FILLED' or 'EXPIRED'"
+          enteredTime:
+            type: string
+            example: string
+          closeTime:
+            type: string
+            example: string
+          tag:
+            type: string
+            example: string
+          accountId:
+            type: number
+            example: 0
+          orderActivityCollection:
+            type: array
+            items:
+              type: string
+              example: The type  has the following subclasses [Execution] descriptions are listed below
+          replacingOrderCollection:
+            type: array
+            items:
+              type: object
+          childOrderStrategies:
+            type: array
+            items:
+              type: object
+          statusDescription:
+            type: string
+            example: string
+    Bond:
+      type: object
+      properties:
+        bondPrice:
+          type: number
+          example: 0
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        exchange:
+          type: string
+          example: string
+        assetType:
+          type: string
+          example: BOND
+    FundamentalData:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        high52:
+          type: number
+          example: 0
+        low52:
+          type: number
+          example: 0
+        dividendAmount:
+          type: number
+          example: 0
+        dividendYield:
+          type: number
+          example: 0
+        dividendDate:
+          type: string
+          example: string
+        peRatio:
+          type: number
+          example: 0
+        pegRatio:
+          type: number
+          example: 0
+        pbRatio:
+          type: number
+          example: 0
+        prRatio:
+          type: number
+          example: 0
+        pcfRatio:
+          type: number
+          example: 0
+        grossMarginTTM:
+          type: number
+          example: 0
+        grossMarginMRQ:
+          type: number
+          example: 0
+        netProfitMarginTTM:
+          type: number
+          example: 0
+        netProfitMarginMRQ:
+          type: number
+          example: 0
+        operatingMarginTTM:
+          type: number
+          example: 0
+        operatingMarginMRQ:
+          type: number
+          example: 0
+        returnOnEquity:
+          type: number
+          example: 0
+        returnOnAssets:
+          type: number
+          example: 0
+        returnOnInvestment:
+          type: number
+          example: 0
+        quickRatio:
+          type: number
+          example: 0
+        currentRatio:
+          type: number
+          example: 0
+        interestCoverage:
+          type: number
+          example: 0
+        totalDebtToCapital:
+          type: number
+          example: 0
+        ltDebtToEquity:
+          type: number
+          example: 0
+        totalDebtToEquity:
+          type: number
+          example: 0
+        epsTTM:
+          type: number
+          example: 0
+        epsChangePercentTTM:
+          type: number
+          example: 0
+        epsChangeYear:
+          type: number
+          example: 0
+        epsChange:
+          type: number
+          example: 0
+        revChangeYear:
+          type: number
+          example: 0
+        revChangeTTM:
+          type: number
+          example: 0
+        revChangeIn:
+          type: number
+          example: 0
+        sharesOutstanding:
+          type: number
+          example: 0
+        marketCapFloat:
+          type: number
+          example: 0
+        marketCap:
+          type: number
+          example: 0
+        bookValuePerShare:
+          type: number
+          example: 0
+        shortIntToFloat:
+          type: number
+          example: 0
+        shortIntDayToCover:
+          type: number
+          example: 0
+        divGrowthRate3Year:
+          type: number
+          example: 0
+        dividendPayAmount:
+          type: number
+          example: 0
+        dividendPayDate:
+          type: string
+          example: string
+        beta:
+          type: number
+          example: 0
+        vol1DayAvg:
+          type: number
+          example: 0
+        vol10DayAvg:
+          type: number
+          example: 0
+        vol3MonthAvg:
+          type: number
+          example: 0
+    Fundamental:
+      type: object
+      properties:
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        exchange:
+          type: string
+          example: string
+        assetType:
+          type: string
+          example: "'EQUITY' or 'ETF' or 'MUTUAL_FUND' or 'UNKNOWN'"
+        fundamental:
+          type: object
+          properties:
+            symbol:
+              type: string
+              example: string
+            high52:
+              type: number
+              example: 0
+            low52:
+              type: number
+              example: 0
+            dividendAmount:
+              type: number
+              example: 0
+            dividendYield:
+              type: number
+              example: 0
+            dividendDate:
+              type: string
+              example: string
+            peRatio:
+              type: number
+              example: 0
+            pegRatio:
+              type: number
+              example: 0
+            pbRatio:
+              type: number
+              example: 0
+            prRatio:
+              type: number
+              example: 0
+            pcfRatio:
+              type: number
+              example: 0
+            grossMarginTTM:
+              type: number
+              example: 0
+            grossMarginMRQ:
+              type: number
+              example: 0
+            netProfitMarginTTM:
+              type: number
+              example: 0
+            netProfitMarginMRQ:
+              type: number
+              example: 0
+            operatingMarginTTM:
+              type: number
+              example: 0
+            operatingMarginMRQ:
+              type: number
+              example: 0
+            returnOnEquity:
+              type: number
+              example: 0
+            returnOnAssets:
+              type: number
+              example: 0
+            returnOnInvestment:
+              type: number
+              example: 0
+            quickRatio:
+              type: number
+              example: 0
+            currentRatio:
+              type: number
+              example: 0
+            interestCoverage:
+              type: number
+              example: 0
+            totalDebtToCapital:
+              type: number
+              example: 0
+            ltDebtToEquity:
+              type: number
+              example: 0
+            totalDebtToEquity:
+              type: number
+              example: 0
+            epsTTM:
+              type: number
+              example: 0
+            epsChangePercentTTM:
+              type: number
+              example: 0
+            epsChangeYear:
+              type: number
+              example: 0
+            epsChange:
+              type: number
+              example: 0
+            revChangeYear:
+              type: number
+              example: 0
+            revChangeTTM:
+              type: number
+              example: 0
+            revChangeIn:
+              type: number
+              example: 0
+            sharesOutstanding:
+              type: number
+              example: 0
+            marketCapFloat:
+              type: number
+              example: 0
+            marketCap:
+              type: number
+              example: 0
+            bookValuePerShare:
+              type: number
+              example: 0
+            shortIntToFloat:
+              type: number
+              example: 0
+            shortIntDayToCover:
+              type: number
+              example: 0
+            divGrowthRate3Year:
+              type: number
+              example: 0
+            dividendPayAmount:
+              type: number
+              example: 0
+            dividendPayDate:
+              type: string
+              example: string
+            beta:
+              type: number
+              example: 0
+            vol1DayAvg:
+              type: number
+              example: 0
+            vol10DayAvg:
+              type: number
+              example: 0
+            vol3MonthAvg:
+              type: number
+              example: 0
+    Instrument:
+      type: object
+      properties:
+        cusip:
+          type: string
+          example: string
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        exchange:
+          type: string
+          example: string
+        assetType:
+          type: string
+          example: "'EQUITY' or 'ETF' or 'FOREX' or 'FUTURE' or 'FUTURE_OPTION' or
+            'INDEX' or 'INDICATOR' or 'MUTUAL_FUND' or 'OPTION' or 'UNKNOWN'"
+    Hours:
+      type: object
+      properties:
+        category:
+          type: string
+          example: string
+        date:
+          type: string
+          example: string
+        exchange:
+          type: string
+          example: string
+        isOpen:
+          type: boolean
+        marketType:
+          type: string
+          example: "'BOND' or 'EQUITY' or 'ETF' or 'FOREX' or 'FUTURE' or
+            'FUTURE_OPTION' or 'INDEX' or 'INDICATOR' or 'MUTUAL_FUND' or
+            'OPTION' or 'UNKNOWN'"
+        product:
+          type: string
+          example: string
+        productName:
+          type: string
+          example: string
+        sessionHours:
+          type: string
+          example: object
+    Mover:
+      type: object
+      properties:
+        change:
+          type: number
+          example: 0
+        description:
+          type: string
+          example: string
+        direction:
+          type: string
+          example: "'up' or 'down'"
+        last:
+          type: number
+          example: 0
+        symbol:
+          type: string
+          example: string
+        totalVolume:
+          type: number
+          example: 0
+    OptionChain:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        status:
+          type: string
+          example: string
+        underlying:
+          type: object
+          properties:
+            ask:
+              type: number
+              example: 0
+            askSize:
+              type: number
+              example: 0
+            bid:
+              type: number
+              example: 0
+            bidSize:
+              type: number
+              example: 0
+            change:
+              type: number
+              example: 0
+            close:
+              type: number
+              example: 0
+            delayed:
+              type: boolean
+            description:
+              type: string
+              example: string
+            exchangeName:
+              type: string
+              example: string
+            fiftyTwoWeekHigh:
+              type: number
+              example: 0
+            fiftyTwoWeekLow:
+              type: number
+              example: 0
+            highPrice:
+              type: number
+              example: 0
+            last:
+              type: number
+              example: 0
+            lowPrice:
+              type: number
+              example: 0
+            mark:
+              type: number
+              example: 0
+            markChange:
+              type: number
+              example: 0
+            markPercentChange:
+              type: number
+              example: 0
+            openPrice:
+              type: number
+              example: 0
+            percentChange:
+              type: number
+              example: 0
+            quoteTime:
+              type: number
+              example: 0
+            symbol:
+              type: string
+              example: string
+            totalVolume:
+              type: number
+              example: 0
+            tradeTime:
+              type: number
+              example: 0
+        strategy:
+          type: string
+          example: "'SINGLE' or 'ANALYTICAL' or 'COVERED' or 'VERTICAL' or 'CALENDAR'
+            or 'STRANGLE' or 'STRADDLE' or 'BUTTERFLY' or 'CONDOR' or 'DIAGONAL'
+            or 'COLLAR' or 'ROLL'"
+        interval:
+          type: number
+          example: 0
+        isDelayed:
+          type: boolean
+        isIndex:
+          type: boolean
+        daysToExpiration:
+          type: number
+          example: 0
+        interestRate:
+          type: number
+          example: 0
+        underlyingPrice:
+          type: number
+          example: 0
+        volatility:
+          type: number
+          example: 0
+        callExpDateMap:
+          type: string
+          example: object
+        putExpDateMap:
+          type: string
+          example: object
+    StrikePriceMap:
+      type: object
+    Underlying:
+      type: object
+      properties:
+        ask:
+          type: number
+          example: 0
+        askSize:
+          type: number
+          example: 0
+        bid:
+          type: number
+          example: 0
+        bidSize:
+          type: number
+          example: 0
+        change:
+          type: number
+          example: 0
+        close:
+          type: number
+          example: 0
+        delayed:
+          type: boolean
+        description:
+          type: string
+          example: string
+        exchangeName:
+          type: string
+          example: "'IND' or 'ASE' or 'NYS' or 'NAS' or 'NAP' or 'PAC' or 'OPR' or
+            'BATS'"
+        fiftyTwoWeekHigh:
+          type: number
+          example: 0
+        fiftyTwoWeekLow:
+          type: number
+          example: 0
+        highPrice:
+          type: number
+          example: 0
+        last:
+          type: number
+          example: 0
+        lowPrice:
+          type: number
+          example: 0
+        mark:
+          type: number
+          example: 0
+        markChange:
+          type: number
+          example: 0
+        markPercentChange:
+          type: number
+          example: 0
+        openPrice:
+          type: number
+          example: 0
+        percentChange:
+          type: number
+          example: 0
+        quoteTime:
+          type: number
+          example: 0
+        symbol:
+          type: string
+          example: string
+        totalVolume:
+          type: number
+          example: 0
+        tradeTime:
+          type: number
+          example: 0
+    ExpirationDate:
+      type: object
+      properties:
+        date:
+          type: string
+          example: string
+    OptionDeliverables:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        assetType:
+          type: string
+          example: string
+        deliverableUnits:
+          type: string
+          example: string
+        currencyType:
+          type: string
+          example: string
+    CandleList:
+      type: object
+      properties:
+        candles:
+          type: array
+          items:
+            type: object
+            properties:
+              close:
+                type: number
+                example: 0
+              datetime:
+                type: number
+                example: 0
+              high:
+                type: number
+                example: 0
+              low:
+                type: number
+                example: 0
+              open:
+                type: number
+                example: 0
+              volume:
+                type: number
+                example: 0
+        empty:
+          type: boolean
+        symbol:
+          type: string
+          example: string
+    Future:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        bidPriceInDouble:
+          type: number
+          example: 0
+        askPriceInDouble:
+          type: number
+          example: 0
+        lastPriceInDouble:
+          type: number
+          example: 0
+        bidId:
+          type: string
+          example: string
+        askId:
+          type: string
+          example: string
+        highPriceInDouble:
+          type: number
+          example: 0
+        lowPriceInDouble:
+          type: number
+          example: 0
+        closePriceInDouble:
+          type: number
+          example: 0
+        exchange:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        lastId:
+          type: string
+          example: string
+        openPriceInDouble:
+          type: number
+          example: 0
+        changeInDouble:
+          type: number
+          example: 0
+        futurePercentChange:
+          type: number
+          example: 0
+        exchangeName:
+          type: string
+          example: string
+        securityStatus:
+          type: string
+          example: string
+        openInterest:
+          type: number
+          example: 0
+        mark:
+          type: number
+          example: 0
+        tick:
+          type: number
+          example: 0
+        tickAmount:
+          type: number
+          example: 0
+        product:
+          type: string
+          example: string
+        futurePriceFormat:
+          type: string
+          example: string
+        futureTradingHours:
+          type: string
+          example: string
+        futureIsTradable:
+          type: boolean
+        futureMultiplier:
+          type: number
+          example: 0
+        futureIsActive:
+          type: boolean
+        futureSettlementPrice:
+          type: number
+          example: 0
+        futureActiveSymbol:
+          type: string
+          example: string
+        futureExpirationDate:
+          type: string
+          example: string
+    FutureOptions:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        bidPriceInDouble:
+          type: number
+          example: 0
+        askPriceInDouble:
+          type: number
+          example: 0
+        lastPriceInDouble:
+          type: number
+          example: 0
+        highPriceInDouble:
+          type: number
+          example: 0
+        lowPriceInDouble:
+          type: number
+          example: 0
+        closePriceInDouble:
+          type: number
+          example: 0
+        description:
+          type: string
+          example: string
+        openPriceInDouble:
+          type: number
+          example: 0
+        netChangeInDouble:
+          type: number
+          example: 0
+        openInterest:
+          type: number
+          example: 0
+        exchangeName:
+          type: string
+          example: string
+        securityStatus:
+          type: string
+          example: string
+        volatility:
+          type: number
+          example: 0
+        moneyIntrinsicValueInDouble:
+          type: number
+          example: 0
+        multiplierInDouble:
+          type: number
+          example: 0
+        digits:
+          type: number
+          example: 0
+        strikePriceInDouble:
+          type: number
+          example: 0
+        contractType:
+          type: string
+          example: string
+        underlying:
+          type: string
+          example: string
+        timeValueInDouble:
+          type: number
+          example: 0
+        deltaInDouble:
+          type: number
+          example: 0
+        gammaInDouble:
+          type: number
+          example: 0
+        thetaInDouble:
+          type: number
+          example: 0
+        vegaInDouble:
+          type: number
+          example: 0
+        rhoInDouble:
+          type: number
+          example: 0
+        mark:
+          type: number
+          example: 0
+        tick:
+          type: number
+          example: 0
+        tickAmount:
+          type: number
+          example: 0
+        futureIsTradable:
+          type: boolean
+        futureTradingHours:
+          type: string
+          example: string
+        futurePercentChange:
+          type: number
+          example: 0
+        futureIsActive:
+          type: boolean
+        futureExpirationDate:
+          type: number
+          example: 0
+        expirationType:
+          type: string
+          example: string
+        exerciseType:
+          type: string
+          example: string
+        inTheMoney:
+          type: boolean
+    Index:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        lastPrice:
+          type: number
+          example: 0
+        openPrice:
+          type: number
+          example: 0
+        highPrice:
+          type: number
+          example: 0
+        lowPrice:
+          type: number
+          example: 0
+        closePrice:
+          type: number
+          example: 0
+        netChange:
+          type: number
+          example: 0
+        totalVolume:
+          type: number
+          example: 0
+        tradeTimeInLong:
+          type: number
+          example: 0
+        exchange:
+          type: string
+          example: string
+        exchangeName:
+          type: string
+          example: string
+        digits:
+          type: number
+          example: 0
+        52WkHigh:
+          type: number
+          example: 0
+        52WkLow:
+          type: number
+          example: 0
+        securityStatus:
+          type: string
+          example: string
+    Forex:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        bidPriceInDouble:
+          type: number
+          example: 0
+        askPriceInDouble:
+          type: number
+          example: 0
+        lastPriceInDouble:
+          type: number
+          example: 0
+        highPriceInDouble:
+          type: number
+          example: 0
+        lowPriceInDouble:
+          type: number
+          example: 0
+        closePriceInDouble:
+          type: number
+          example: 0
+        exchange:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        openPriceInDouble:
+          type: number
+          example: 0
+        changeInDouble:
+          type: number
+          example: 0
+        percentChange:
+          type: number
+          example: 0
+        exchangeName:
+          type: string
+          example: string
+        digits:
+          type: number
+          example: 0
+        securityStatus:
+          type: string
+          example: string
+        tick:
+          type: number
+          example: 0
+        tickAmount:
+          type: number
+          example: 0
+        product:
+          type: string
+          example: string
+        tradingHours:
+          type: string
+          example: string
+        isTradable:
+          type: boolean
+        marketMaker:
+          type: string
+          example: string
+        52WkHighInDouble:
+          type: number
+          example: 0
+        52WkLowInDouble:
+          type: number
+          example: 0
+        mark:
+          type: number
+          example: 0
+    ETF:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        bidPrice:
+          type: number
+          example: 0
+        bidSize:
+          type: number
+          example: 0
+        bidId:
+          type: string
+          example: string
+        askPrice:
+          type: number
+          example: 0
+        askSize:
+          type: number
+          example: 0
+        askId:
+          type: string
+          example: string
+        lastPrice:
+          type: number
+          example: 0
+        lastSize:
+          type: number
+          example: 0
+        lastId:
+          type: string
+          example: string
+        openPrice:
+          type: number
+          example: 0
+        highPrice:
+          type: number
+          example: 0
+        lowPrice:
+          type: number
+          example: 0
+        closePrice:
+          type: number
+          example: 0
+        netChange:
+          type: number
+          example: 0
+        totalVolume:
+          type: number
+          example: 0
+        quoteTimeInLong:
+          type: number
+          example: 0
+        tradeTimeInLong:
+          type: number
+          example: 0
+        mark:
+          type: number
+          example: 0
+        exchange:
+          type: string
+          example: string
+        exchangeName:
+          type: string
+          example: string
+        marginable:
+          type: boolean
+        shortable:
+          type: boolean
+        volatility:
+          type: number
+          example: 0
+        digits:
+          type: number
+          example: 0
+        52WkHigh:
+          type: number
+          example: 0
+        52WkLow:
+          type: number
+          example: 0
+        peRatio:
+          type: number
+          example: 0
+        divAmount:
+          type: number
+          example: 0
+        divYield:
+          type: number
+          example: 0
+        divDate:
+          type: string
+          example: string
+        securityStatus:
+          type: string
+          example: string
+        regularMarketLastPrice:
+          type: number
+          example: 0
+        regularMarketLastSize:
+          type: number
+          example: 0
+        regularMarketNetChange:
+          type: number
+          example: 0
+        regularMarketTradeTimeInLong:
+          type: number
+          example: 0
+    Transaction:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "'TRADE' or 'RECEIVE_AND_DELIVER' or 'DIVIDEND_OR_INTEREST' or
+            'ACH_RECEIPT' or 'ACH_DISBURSEMENT' or 'CASH_RECEIPT' or
+            'CASH_DISBURSEMENT' or 'ELECTRONIC_FUND' or 'WIRE_OUT' or 'WIRE_IN'
+            or 'JOURNAL' or 'MEMORANDUM' or 'MARGIN_CALL' or 'MONEY_MARKET' or
+            'SMA_ADJUSTMENT'"
+        clearingReferenceNumber:
+          type: string
+          example: string
+        subAccount:
+          type: string
+          example: string
+        settlementDate:
+          type: string
+          example: string
+        orderId:
+          type: string
+          example: string
+        sma:
+          type: number
+          example: 0
+        requirementReallocationAmount:
+          type: number
+          example: 0
+        dayTradeBuyingPowerEffect:
+          type: number
+          example: 0
+        netAmount:
+          type: number
+          example: 0
+        transactionDate:
+          type: string
+          example: string
+        orderDate:
+          type: string
+          example: string
+        transactionSubType:
+          type: string
+          example: string
+        transactionId:
+          type: number
+          example: 0
+        cashBalanceEffectFlag:
+          type: boolean
+        description:
+          type: string
+          example: string
+        achStatus:
+          type: string
+          example: "'Approved' or 'Rejected' or 'Cancel' or 'Error'"
+        accruedInterest:
+          type: number
+          example: 0
+        fees:
+          type: string
+          example: object
+        transactionItem:
+          type: object
+          properties:
+            accountId:
+              type: number
+              example: 0
+            amount:
+              type: number
+              example: 0
+            price:
+              type: number
+              example: 0
+            cost:
+              type: number
+              example: 0
+            parentOrderKey:
+              type: number
+              example: 0
+            parentChildIndicator:
+              type: string
+              example: string
+            instruction:
+              type: string
+              example: string
+            positionEffect:
+              type: string
+              example: string
+            instrument:
+              type: object
+              properties:
+                symbol:
+                  type: string
+                  example: string
+                underlyingSymbol:
+                  type: string
+                  example: string
+                optionExpirationDate:
+                  type: string
+                  example: string
+                optionStrikePrice:
+                  type: number
+                  example: 0
+                putCall:
+                  type: string
+                  example: string
+                cusip:
+                  type: string
+                  example: string
+                description:
+                  type: string
+                  example: string
+                assetType:
+                  type: string
+                  example: string
+                bondMaturityDate:
+                  type: string
+                  example: string
+                bondInterestRate:
+                  type: number
+                  example: 0
+    Preferences:
+      type: object
+      properties:
+        expressTrading:
+          type: boolean
+        directOptionsRouting:
+          type: boolean
+        directEquityRouting:
+          type: boolean
+        defaultEquityOrderLegInstruction:
+          type: string
+          example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or 'NONE'"
+        defaultEquityOrderType:
+          type: string
+          example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or 'TRAILING_STOP' or
+            'MARKET_ON_CLOSE' or 'NONE'"
+        defaultEquityOrderPriceLinkType:
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'NONE'"
+        defaultEquityOrderDuration:
+          type: string
+          example: "'DAY' or 'GOOD_TILL_CANCEL' or 'NONE'"
+        defaultEquityOrderMarketSession:
+          type: string
+          example: "'AM' or 'PM' or 'NORMAL' or 'SEAMLESS' or 'NONE'"
+        defaultEquityQuantity:
+          type: number
+          example: 0
+        mutualFundTaxLotMethod:
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or
+            'AVERAGE_COST' or 'NONE'"
+        optionTaxLotMethod:
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or
+            'AVERAGE_COST' or 'NONE'"
+        equityTaxLotMethod:
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or
+            'AVERAGE_COST' or 'NONE'"
+        defaultAdvancedToolLaunch:
+          type: string
+          example: "'TA' or 'N' or 'Y' or 'TOS' or 'NONE' or 'CC2'"
+        authTokenTimeout:
+          type: string
+          example: "'FIFTY_FIVE_MINUTES' or 'TWO_HOURS' or 'FOUR_HOURS' or
+            'EIGHT_HOURS'"
+    SubscriptionKey:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                example: string
+    UserPrincipal:
+      type: object
+      properties:
+        authToken:
+          type: string
+          example: string
+        userId:
+          type: string
+          example: string
+        userCdDomainId:
+          type: string
+          example: string
+        primaryAccountId:
+          type: string
+          example: string
+        lastLoginTime:
+          type: string
+          example: string
+        tokenExpirationTime:
+          type: string
+          example: string
+        loginTime:
+          type: string
+          example: string
+        accessLevel:
+          type: string
+          example: string
+        stalePassword:
+          type: boolean
+        streamerInfo:
+          type: object
+          properties:
+            streamerBinaryUrl:
+              type: string
+              example: string
+            streamerSocketUrl:
+              type: string
+              example: string
+            token:
+              type: string
+              example: string
+            tokenTimestamp:
+              type: string
+              example: string
+            userGroup:
+              type: string
+              example: string
+            accessLevel:
+              type: string
+              example: string
+            acl:
+              type: string
+              example: string
+            appId:
+              type: string
+              example: string
+        professionalStatus:
+          type: string
+          example: "'PROFESSIONAL' or 'NON_PROFESSIONAL' or 'UNKNOWN_STATUS'"
+        quotes:
+          type: object
+          properties:
+            isNyseDelayed:
+              type: boolean
+            isNasdaqDelayed:
+              type: boolean
+            isOpraDelayed:
+              type: boolean
+            isAmexDelayed:
+              type: boolean
+            isCmeDelayed:
+              type: boolean
+            isIceDelayed:
+              type: boolean
+            isForexDelayed:
+              type: boolean
+        streamerSubscriptionKeys:
+          type: object
+          properties:
+            keys:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: string
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              accountId:
+                type: string
+                example: string
+              description:
+                type: string
+                example: string
+              displayName:
+                type: string
+                example: string
+              accountCdDomainId:
+                type: string
+                example: string
+              company:
+                type: string
+                example: string
+              segment:
+                type: string
+                example: string
+              surrogateIds:
+                type: string
+                example: object
+              preferences:
+                type: object
+                properties:
+                  expressTrading:
+                    type: boolean
+                  directOptionsRouting:
+                    type: boolean
+                  directEquityRouting:
+                    type: boolean
+                  defaultEquityOrderLegInstruction:
+                    type: string
+                    example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or
+                      'NONE'"
+                  defaultEquityOrderType:
+                    type: string
+                    example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or
+                      'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'NONE'"
+                  defaultEquityOrderPriceLinkType:
+                    type: string
+                    example: "'VALUE' or 'PERCENT' or 'NONE'"
+                  defaultEquityOrderDuration:
+                    type: string
+                    example: "'DAY' or 'GOOD_TILL_CANCEL' or 'NONE'"
+                  defaultEquityOrderMarketSession:
+                    type: string
+                    example: "'AM' or 'PM' or 'NORMAL' or 'SEAMLESS' or 'NONE'"
+                  defaultEquityQuantity:
+                    type: number
+                    example: 0
+                  mutualFundTaxLotMethod:
+                    type: string
+                    example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                      'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+                  optionTaxLotMethod:
+                    type: string
+                    example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                      'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+                  equityTaxLotMethod:
+                    type: string
+                    example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or
+                      'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+                  defaultAdvancedToolLaunch:
+                    type: string
+                    example: "'TA' or 'N' or 'Y' or 'TOS' or 'NONE' or 'CC2'"
+                  authTokenTimeout:
+                    type: string
+                    example: "'FIFTY_FIVE_MINUTES' or 'TWO_HOURS' or 'FOUR_HOURS' or
+                      'EIGHT_HOURS'"
+              acl:
+                type: string
+                example: string
+              authorizations:
+                type: object
+                properties:
+                  apex:
+                    type: boolean
+                  levelTwoQuotes:
+                    type: boolean
+                  stockTrading:
+                    type: boolean
+                  marginTrading:
+                    type: boolean
+                  streamingNews:
+                    type: boolean
+                  optionTradingLevel:
+                    type: string
+                    example: "'COVERED' or 'FULL' or 'LONG' or 'SPREAD' or 'NONE'"
+                  streamerAccess:
+                    type: boolean
+                  advancedMargin:
+                    type: boolean
+                  scottradeAccount:
+                    type: boolean
+    Watchlist:
+      type: object
+      properties:
+        name:
+          type: string
+          example: string
+        watchlistId:
+          type: string
+          example: string
+        accountId:
+          type: string
+          example: string
+        status:
+          type: string
+          example: "'UNCHANGED' or 'CREATED' or 'UPDATED' or 'DELETED'"
+        watchlistItems:
+          type: array
+          items:
+            type: object
+            properties:
+              sequenceId:
+                type: number
+                example: 0
+              quantity:
+                type: number
+                example: 0
+              averagePrice:
+                type: number
+                example: 0
+              commission:
+                type: number
+                example: 0
+              purchasedDate:
+                type: string
+                example: DateParam
+              instrument:
+                type: object
+                properties:
+                  symbol:
+                    type: string
+                    example: string
+                  description:
+                    type: string
+                    example: string
+                  assetType:
+                    type: string
+                    example: "'EQUITY' or 'OPTION' or 'MUTUAL_FUND' or 'FIXED_INCOME'
+                      or 'INDEX'"
+              status:
+                type: string
+                example: "'UNCHANGED' or 'CREATED' or 'UPDATED' or 'DELETED'"
+    Mutual_Fund:
+      type: object
+      properties:
+        symbol:
+          type: string
+          example: string
+        description:
+          type: string
+          example: string
+        closePrice:
+          type: number
+          example: 0
+        netChange:
+          type: number
+          example: 0
+        totalVolume:
+          type: number
+          example: 0
+        tradeTimeInLong:
+          type: number
+          example: 0
+        exchange:
+          type: string
+          example: string
+        exchangeName:
+          type: string
+          example: string
+        digits:
+          type: number
+          example: 0
+        52WkHigh:
+          type: number
+          example: 0
+        52WkLow:
+          type: number
+          example: 0
+        nAV:
+          type: number
+          example: 0
+        peRatio:
+          type: number
+          example: 0
+        divAmount:
+          type: number
+          example: 0
+        divYield:
+          type: number
+          example: 0
+        divDate:
+          type: string
+          example: string
+        securityStatus:
+          type: string
+          example: string
+    UpdatePreferences: 
+      type: object
+      properties: 
+        expressTrading: 
+          type: boolean
+        directOptionsRouting: 
+          type: boolean
+        directEquityRouting: 
+          type: boolean
+        defaultEquityOrderLegInstruction: 
+          type: string
+          example: "'BUY' or 'SELL' or 'BUY_TO_COVER' or 'SELL_SHORT' or 'NONE'"
+        defaultEquityOrderType: 
+          type: string
+          example: "'MARKET' or 'LIMIT' or 'STOP' or 'STOP_LIMIT' or 'TRAILING_STOP' or 'MARKET_ON_CLOSE' or 'NONE'"
+        defaultEquityOrderPriceLinkType: 
+          type: string
+          example: "'VALUE' or 'PERCENT' or 'NONE'"
+        defaultEquityOrderDuration: 
+          type: string
+          example: "'DAY' or 'GOOD_TILL_CANCEL' or 'NONE'"
+        defaultEquityOrderMarketSession: 
+          type: string
+          example: "'AM' or 'PM' or 'NORMAL' or 'SEAMLESS' or 'NONE'"
+        defaultEquityQuantity: 
+          type: integer
+          format: int32
+          example: 0
+        mutualFundTaxLotMethod: 
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+        optionTaxLotMethod: 
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+        equityTaxLotMethod: 
+          type: string
+          example: "'FIFO' or 'LIFO' or 'HIGH_COST' or 'LOW_COST' or 'MINIMUM_TAX' or 'AVERAGE_COST' or 'NONE'"
+        defaultAdvancedToolLaunch: 
+          type: string
+          example: "'TA' or 'N' or 'Y' or 'TOS' or 'NONE' or 'CC2'"
+        authTokenTimeout: 
+          type: string
+          example: "'FIFTY_FIVE_MINUTES' or 'TWO_HOURS' or 'FOUR_HOURS' or 'EIGHT_HOURS'"
+    CreateWatchlist: 
+      type: object
+      properties: 
+        name: 
+          type: string
+          example: string
+        watchlistItems: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              quantity: 
+                type: integer
+                format: int32
+                example: 0
+              averagePrice: 
+                type: integer
+                format: int32
+                example: 0
+              commission: 
+                type: integer
+                format: int32
+                example: 0
+              purchasedDate: 
+                type: string
+                example: DateParam
+              instrument: 
+                type: object
+                properties: 
+                  symbol: 
+                    type: string
+                    example: string
+                  assetType: 
+                    type: string
+                    example: "'EQUITY' or 'OPTION' or 'MUTUAL_FUND' or 'FIXED_INCOME' or 'INDEX'"
+    UpdateWatchlist: 
+      type: object
+      properties: 
+        name: 
+          type: string
+          example: string
+        watchlistId: 
+          type: string
+          example: string
+        watchlistItems: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              quantity: 
+                type: integer
+                format: int32
+                example: 0
+              averagePrice: 
+                type: integer
+                format: int32
+                example: 0
+              commission: 
+                type: integer
+                format: int32
+                example: 0
+              purchasedDate: 
+                type: string
+                example: DateParam
+              instrument: 
+                type: object
+                properties: 
+                  symbol: 
+                    type: string
+                    example: string
+                  assetType: 
+                    type: string
+                    example: "'EQUITY' or 'OPTION' or 'MUTUAL_FUND' or 'FIXED_INCOME' or 'INDEX'"
+              sequenceId: 
+                type: integer
+                format: int32
+                example: 0
