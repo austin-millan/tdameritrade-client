@@ -1,2 +1,2 @@
-module gitlab.com/austin-millan/ameritrade_proto
+module gitlab.com/austin-millan/robinhood-openapi/openapi
 go 1.12

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	// "github.com/sirupsen/logrus"
 	"encoding/json"
-	ameritrade "gitlab.com/austin-millan/tdameritrade_openapi/openapi"
+	ameritrade "gitlab.com/austin-millan/tdameritrade-openapi/openapi"
 )
 
 func main() {
