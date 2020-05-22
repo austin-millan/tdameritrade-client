@@ -37,8 +37,8 @@ Name | Type | Description | Notes
 **Tag** | **string** |  | [optional] 
 **AccountId** | **float32** |  | [optional] 
 **OrderActivityCollection** | **[]string** |  | [optional] 
-**ReplacingOrderCollection** | [**[]map[string]interface{}**](map[string]interface{}.md) |  | [optional] 
-**ChildOrderStrategies** | [**[]map[string]interface{}**](map[string]interface{}.md) |  | [optional] 
+**ReplacingOrderCollection** | **[]map[string]interface{}** |  | [optional] 
+**ChildOrderStrategies** | **[]map[string]interface{}** |  | [optional] 
 **StatusDescription** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

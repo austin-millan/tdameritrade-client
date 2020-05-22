@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **Tag** | **string** |  | [optional] 
 **AccountId** | **float32** |  | [optional] 
 **OrderActivityCollection** | [**[]Execution**](Execution.md) |  | [optional] 
-**ReplacingOrderCollection** | [**[]map[string]interface{}**](map[string]interface{}.md) |  | [optional] 
+**ReplacingOrderCollection** | **[]map[string]interface{}** |  | [optional] 
 **ChildOrderStrategies** | [**[]OrderChildOrderStrategies**](Order_childOrderStrategies.md) |  | [optional] 
 **StatusDescription** | **string** |  | [optional] 
 

@@ -22,5 +22,6 @@ rm openapi/api_*.go \
     openapi/api/openapi.yaml \
     openapi/docs/*Api.md
 
-echo "module gitlab.com/austin-millan/robinhood-openapi/openapi
-go 1.12" > go.mod
+echo "module gitlab.com/trade-hawk/tdameritrade-openapi
+go 1.13" > go.mod
+
