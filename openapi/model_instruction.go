@@ -14,12 +14,12 @@ type Instruction string
 
 // List of Instruction
 const (
-	BUY Instruction = "BUY"
-	SELL Instruction = "SELL"
-	BUY_TO_COVER Instruction = "BUY_TO_COVER"
-	BUY_TO_OPEN Instruction = "BUY_TO_OPEN"
-	BUY_TO_CLOSE Instruction = "BUY_TO_CLOSE"
-	SELL_TO_OPEN Instruction = "SELL_TO_OPEN"
-	SELL_TO_CLOSE Instruction = "SELL_TO_CLOSE"
-	EXCHANGE Instruction = "EXCHANGE"
+	INSTRUCTION_BUY Instruction = "BUY"
+	INSTRUCTION_SELL Instruction = "SELL"
+	INSTRUCTION_BUY_TO_COVER Instruction = "BUY_TO_COVER"
+	INSTRUCTION_BUY_TO_OPEN Instruction = "BUY_TO_OPEN"
+	INSTRUCTION_BUY_TO_CLOSE Instruction = "BUY_TO_CLOSE"
+	INSTRUCTION_SELL_TO_OPEN Instruction = "SELL_TO_OPEN"
+	INSTRUCTION_SELL_TO_CLOSE Instruction = "SELL_TO_CLOSE"
+	INSTRUCTION_EXCHANGE Instruction = "EXCHANGE"
 )

@@ -14,7 +14,7 @@ type PositionEffect string
 
 // List of PositionEffect
 const (
-	OPENING PositionEffect = "OPENING"
-	CLOSING PositionEffect = "CLOSING"
-	AUTOMATIC PositionEffect = "AUTOMATIC"
+	POSITIONEFFECT_OPENING PositionEffect = "OPENING"
+	POSITIONEFFECT_CLOSING PositionEffect = "CLOSING"
+	POSITIONEFFECT_AUTOMATIC PositionEffect = "AUTOMATIC"
 )

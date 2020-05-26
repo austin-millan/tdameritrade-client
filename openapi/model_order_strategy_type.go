@@ -14,7 +14,7 @@ type OrderStrategyType string
 
 // List of OrderStrategyType
 const (
-	SINGLE OrderStrategyType = "SINGLE"
-	OCO OrderStrategyType = "OCO"
-	TRIGGER OrderStrategyType = "TRIGGER"
+	ORDERSTRATEGYTYPE_SINGLE OrderStrategyType = "SINGLE"
+	ORDERSTRATEGYTYPE_OCO OrderStrategyType = "OCO"
+	ORDERSTRATEGYTYPE_TRIGGER OrderStrategyType = "TRIGGER"
 )

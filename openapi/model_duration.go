@@ -14,7 +14,7 @@ type Duration string
 
 // List of Duration
 const (
-	DAY Duration = "DAY"
-	GOOD_TILL_CANCEL Duration = "GOOD_TILL_CANCEL"
-	FILL_OR_KILL Duration = "FILL_OR_KILL"
+	DURATION_DAY Duration = "DAY"
+	DURATION_GOOD_TILL_CANCEL Duration = "GOOD_TILL_CANCEL"
+	DURATION_FILL_OR_KILL Duration = "FILL_OR_KILL"
 )

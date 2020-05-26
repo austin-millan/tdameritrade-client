@@ -13,7 +13,7 @@ package openapi
 type SavedOrderOrderLegCollection struct {
 	OrderLegType AssetType `json:"orderLegType,omitempty"`
 	LegId float32 `json:"legId,omitempty"`
-	Instrument AnyOfOptionMutualFundCashEquivalentEquityFixedIncome `json:"instrument,omitempty"`
+	Instrument InstrumentType `json:"instrument,omitempty"`
 	Instruction Instruction `json:"instruction,omitempty"`
 	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
 	Quantity float32 `json:"quantity,omitempty"`

@@ -14,9 +14,9 @@ type StopType string
 
 // List of StopType
 const (
-	STANDARD StopType = "STANDARD"
-	BID StopType = "BID"
-	ASK StopType = "ASK"
-	LAST StopType = "LAST"
-	MARK StopType = "MARK"
+	STOPTYPE_STANDARD StopType = "STANDARD"
+	STOPTYPE_BID StopType = "BID"
+	STOPTYPE_ASK StopType = "ASK"
+	STOPTYPE_LAST StopType = "LAST"
+	STOPTYPE_MARK StopType = "MARK"
 )

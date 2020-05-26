@@ -14,13 +14,13 @@ type PriceLinkBasis string
 
 // List of PriceLinkBasis
 const (
-	MANUAL PriceLinkBasis = "MANUAL"
-	BASE PriceLinkBasis = "BASE"
-	TRIGGER PriceLinkBasis = "TRIGGER"
-	LAST PriceLinkBasis = "LAST"
-	BID PriceLinkBasis = "BID"
-	ASK PriceLinkBasis = "ASK"
-	ASK_BID PriceLinkBasis = "ASK_BID"
-	MARK PriceLinkBasis = "MARK"
-	AVERAGE PriceLinkBasis = "AVERAGE"
+	PRICELINKBASIS_MANUAL PriceLinkBasis = "MANUAL"
+	PRICELINKBASIS_BASE PriceLinkBasis = "BASE"
+	PRICELINKBASIS_TRIGGER PriceLinkBasis = "TRIGGER"
+	PRICELINKBASIS_LAST PriceLinkBasis = "LAST"
+	PRICELINKBASIS_BID PriceLinkBasis = "BID"
+	PRICELINKBASIS_ASK PriceLinkBasis = "ASK"
+	PRICELINKBASIS_ASK_BID PriceLinkBasis = "ASK_BID"
+	PRICELINKBASIS_MARK PriceLinkBasis = "MARK"
+	PRICELINKBASIS_AVERAGE PriceLinkBasis = "AVERAGE"
 )

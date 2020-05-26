@@ -14,8 +14,8 @@ type CurrencyType string
 
 // List of CurrencyType
 const (
-	USD CurrencyType = "USD"
-	CAD CurrencyType = "CAD"
-	EUR CurrencyType = "EUR"
-	JPY CurrencyType = "JPY"
+	CURRENCYTYPE_USD CurrencyType = "USD"
+	CURRENCYTYPE_CAD CurrencyType = "CAD"
+	CURRENCYTYPE_EUR CurrencyType = "EUR"
+	CURRENCYTYPE_JPY CurrencyType = "JPY"
 )

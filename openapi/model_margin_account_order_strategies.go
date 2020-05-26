@@ -43,7 +43,7 @@ type MarginAccountOrderStrategies struct {
 	CloseTime string `json:"closeTime,omitempty"`
 	Tag string `json:"tag,omitempty"`
 	AccountId float32 `json:"accountId,omitempty"`
-	OrderActivityCollection AnyOfExecution `json:"orderActivityCollection,omitempty"`
+	OrderActivityCollection Execution `json:"orderActivityCollection,omitempty"`
 	ReplacingOrderCollection []map[string]interface{} `json:"replacingOrderCollection,omitempty"`
 	ChildOrderStrategies []map[string]interface{} `json:"childOrderStrategies,omitempty"`
 	StatusDescription string `json:"statusDescription,omitempty"`

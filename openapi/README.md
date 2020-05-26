@@ -73,6 +73,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Account](docs/Account.md)
+ - [AccountType](docs/AccountType.md)
  - [AssetType](docs/AssetType.md)
  - [Bond](docs/Bond.md)
  - [CandleList](docs/CandleList.md)
@@ -108,6 +109,7 @@ Class | Method | HTTP request | Description
  - [Index](docs/Index.md)
  - [Instruction](docs/Instruction.md)
  - [Instrument](docs/Instrument.md)
+ - [InstrumentType](docs/InstrumentType.md)
  - [MarginAccount](docs/MarginAccount.md)
  - [MarginAccountCurrentBalances](docs/MarginAccountCurrentBalances.md)
  - [MarginAccountInitialBalances](docs/MarginAccountInitialBalances.md)

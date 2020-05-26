@@ -14,7 +14,6 @@ type EquityPriceLinkType string
 
 // List of EquityPriceLinkType
 const (
-	VALUE EquityPriceLinkType = "VALUE"
-	PERCENT EquityPriceLinkType = "PERCENT"
-	NONE EquityPriceLinkType = "NONE"
+	EQUITYPRICELINKTYPE_VALUE EquityPriceLinkType = "VALUE"
+	EQUITYPRICELINKTYPE_PERCENT EquityPriceLinkType = "PERCENT"
 )

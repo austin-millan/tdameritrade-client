@@ -14,16 +14,16 @@ type DestinationExchange string
 
 // List of DestinationExchange
 const (
-	INET DestinationExchange = "INET"
-	ECN_ARCA DestinationExchange = "ECN_ARCA"
-	CBOE DestinationExchange = "CBOE"
-	AMEX DestinationExchange = "AMEX"
-	PHLX DestinationExchange = "PHLX"
-	ISE DestinationExchange = "ISE"
-	BOX DestinationExchange = "BOX"
-	NYSE DestinationExchange = "NYSE"
-	NASDAQ DestinationExchange = "NASDAQ"
-	BATS DestinationExchange = "BATS"
-	C2 DestinationExchange = "C2"
-	AUTO DestinationExchange = "AUTO"
+	DESTINATIONEXCHANGE_INET DestinationExchange = "INET"
+	DESTINATIONEXCHANGE_ECN_ARCA DestinationExchange = "ECN_ARCA"
+	DESTINATIONEXCHANGE_CBOE DestinationExchange = "CBOE"
+	DESTINATIONEXCHANGE_AMEX DestinationExchange = "AMEX"
+	DESTINATIONEXCHANGE_PHLX DestinationExchange = "PHLX"
+	DESTINATIONEXCHANGE_ISE DestinationExchange = "ISE"
+	DESTINATIONEXCHANGE_BOX DestinationExchange = "BOX"
+	DESTINATIONEXCHANGE_NYSE DestinationExchange = "NYSE"
+	DESTINATIONEXCHANGE_NASDAQ DestinationExchange = "NASDAQ"
+	DESTINATIONEXCHANGE_BATS DestinationExchange = "BATS"
+	DESTINATIONEXCHANGE_C2 DestinationExchange = "C2"
+	DESTINATIONEXCHANGE_AUTO DestinationExchange = "AUTO"
 )

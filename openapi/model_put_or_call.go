@@ -14,7 +14,7 @@ type PutOrCall string
 
 // List of PutOrCall
 const (
-	PUT PutOrCall = "PUT"
-	CALL PutOrCall = "CALL"
-	ALL PutOrCall = "ALL"
+	PUTORCALL_PUT PutOrCall = "PUT"
+	PUTORCALL_CALL PutOrCall = "CALL"
+	PUTORCALL_ALL PutOrCall = "ALL"
 )

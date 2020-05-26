@@ -14,8 +14,8 @@ type Session string
 
 // List of Session
 const (
-	NORMAL Session = "NORMAL"
-	SEAMLESS Session = "SEAMLESS"
-	AM Session = "AM"
-	PM Session = "PM"
+	SESSION_NORMAL Session = "NORMAL"
+	SESSION_SEAMLESS Session = "SEAMLESS"
+	SESSION_AM Session = "AM"
+	SESSION_PM Session = "PM"
 )

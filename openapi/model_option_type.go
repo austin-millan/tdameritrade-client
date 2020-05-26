@@ -14,7 +14,7 @@ type OptionType string
 
 // List of OptionType
 const (
-	VANILLA OptionType = "VANILLA"
-	BINARY OptionType = "BINARY"
-	BARRIER OptionType = "BARRIER"
+	OPTIONTYPE_VANILLA OptionType = "VANILLA"
+	OPTIONTYPE_BINARY OptionType = "BINARY"
+	OPTIONTYPE_BARRIER OptionType = "BARRIER"
 )

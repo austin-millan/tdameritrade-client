@@ -1662,12 +1662,7 @@ components:
                 type: number
                 example: 0
               instrument:
-                anyOf:
-                  - $ref: "#/components/schemas/Option"
-                  - $ref: "#/components/schemas/MutualFund"
-                  - $ref: "#/components/schemas/CashEquivalent"
-                  - $ref: "#/components/schemas/Equity"
-                  - $ref: "#/components/schemas/FixedIncome"
+                $ref: "#/components/schemas/InstrumentType"
               instruction:
                 $ref: "#/components/schemas/Instruction"
               positionEffect:
@@ -1989,12 +1984,7 @@ components:
                 type: number
                 example: 0
               instrument:
-                anyOf:
-                  - $ref: "#/components/schemas/Option"
-                  - $ref: "#/components/schemas/MutualFund"
-                  - $ref: "#/components/schemas/CashEquivalent"
-                  - $ref: "#/components/schemas/Equity"
-                  - $ref: "#/components/schemas/FixedIncome"
+                $ref: "#/components/schemas/InstrumentType"
               instruction:
                 $ref: "#/components/schemas/Instruction"
               positionEffect:
@@ -2106,12 +2096,7 @@ components:
                       type: number
                       example: 0
                     instrument:
-                      anyOf:
-                        - $ref: "#/components/schemas/Option"
-                        - $ref: "#/components/schemas/MutualFund"
-                        - $ref: "#/components/schemas/CashEquivalent"
-                        - $ref: "#/components/schemas/Equity"
-                        - $ref: "#/components/schemas/FixedIncome"
+                      $ref: "#/components/schemas/InstrumentType"
                     instruction:
                       $ref: "#/components/schemas/Instruction"
                     positionEffect:
@@ -2170,9 +2155,7 @@ components:
       type: object
       properties:
         securitiesAccount:
-          anyOf:
-            - $ref: "#/components/schemas/CashAccount"
-            - $ref: "#/components/schemas/MarginAccount"
+          $ref: "#/components/schemas/AccountType"
     CashAccount:
       type: object
       properties:
@@ -2219,12 +2202,7 @@ components:
                 type: number
                 example: 0
               instrument:
-                anyOf:
-                  - $ref: "#/components/schemas/Option"
-                  - $ref: "#/components/schemas/MutualFund"
-                  - $ref: "#/components/schemas/CashEquivalent"
-                  - $ref: "#/components/schemas/Equity"
-                  - $ref: "#/components/schemas/FixedIncome"
+                $ref: "#/components/schemas/InstrumentType"
               marketValue:
                 type: number
                 example: 0
@@ -2298,12 +2276,7 @@ components:
                       type: number
                       example: 0
                     instrument:
-                      anyOf:
-                        - $ref: "#/components/schemas/Option"
-                        - $ref: "#/components/schemas/MutualFund"
-                        - $ref: "#/components/schemas/CashEquivalent"
-                        - $ref: "#/components/schemas/Equity"
-                        - $ref: "#/components/schemas/FixedIncome"
+                      $ref: "#/components/schemas/InstrumentType"
                     instruction:
                       $ref: "#/components/schemas/Instruction"
                     positionEffect:
@@ -2584,12 +2557,7 @@ components:
                 type: number
                 example: 0
               instrument:
-                anyOf:
-                  - $ref: "#/components/schemas/Option"
-                  - $ref: "#/components/schemas/MutualFund"
-                  - $ref: "#/components/schemas/CashEquivalent"
-                  - $ref: "#/components/schemas/Equity"
-                  - $ref: "#/components/schemas/FixedIncome"
+                $ref: "#/components/schemas/InstrumentType"
               marketValue:
                 type: number
                 example: 0
@@ -2663,12 +2631,7 @@ components:
                       type: number
                       example: 0
                     instrument:
-                      anyOf:
-                        - $ref: "#/components/schemas/Option"
-                        - $ref: "#/components/schemas/MutualFund"
-                        - $ref: "#/components/schemas/CashEquivalent"
-                        - $ref: "#/components/schemas/Equity"
-                        - $ref: "#/components/schemas/FixedIncome"
+                      $ref: "#/components/schemas/InstrumentType"
                     instruction:
                       $ref: "#/components/schemas/Instruction"
                     positionEffect:
@@ -2707,8 +2670,7 @@ components:
                 type: number
                 example: 0
               orderActivityCollection:
-                anyOf:
-                  - $ref: "#/components/schemas/Execution"
+                $ref: "#/components/schemas/Execution"
               replacingOrderCollection:
                 type: array
                 items:
@@ -3108,12 +3070,7 @@ components:
                   type: number
                   example: 0
                 instrument:
-                  anyOf:
-                    - $ref: "#/components/schemas/Option"
-                    - $ref: "#/components/schemas/MutualFund"
-                    - $ref: "#/components/schemas/CashEquivalent"
-                    - $ref: "#/components/schemas/Equity"
-                    - $ref: "#/components/schemas/FixedIncome"
+                  $ref: "#/components/schemas/InstrumentType"
                 instruction:
                   $ref: "#/components/schemas/Instruction"
                 positionEffect:
@@ -3154,8 +3111,7 @@ components:
           orderActivityCollection:
             type: array
             items:
-              anyOf:
-                - $ref: "#/components/schemas/Execution"
+              $ref: "#/components/schemas/Execution"
           replacingOrderCollection:
             type: array
             items:
@@ -4791,7 +4747,6 @@ components:
         - INDICATOR
         - FOREX
         - MUTUAL_FUND
-        - FIXED_INCOME
         - INDEX
         - CASH_EQUIVALENT
         - FIXED_INCOME
@@ -4864,11 +4819,10 @@ components:
         - TICK
     EquityPriceLinkType:
       type: string
-      example:  "'VALUE' or 'PERCENT' or 'NONE'"
+      example:  "'VALUE' or 'PERCENT'"
       enum:
         - VALUE
         - PERCENT
-        - NONE
     StopType:
       type: string
       example: "'STANDARD' or 'BID' or 'ASK' or 'LAST' or 'MARK'"
@@ -5038,3 +4992,16 @@ components:
         - CAD
         - EUR
         - JPY
+    AccountType:
+      type: object
+      oneOf:
+        - $ref: "#/components/schemas/CashAccount"
+        - $ref: "#/components/schemas/MarginAccount"
+    InstrumentType:
+      type: object
+      oneOf:
+        - $ref: "#/components/schemas/Option"
+        - $ref: "#/components/schemas/MutualFund"
+        - $ref: "#/components/schemas/CashEquivalent"
+        - $ref: "#/components/schemas/Equity"
+        - $ref: "#/components/schemas/FixedIncome"

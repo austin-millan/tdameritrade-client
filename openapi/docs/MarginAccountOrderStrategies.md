@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **CloseTime** | **string** |  | [optional] 
 **Tag** | **string** |  | [optional] 
 **AccountId** | **float32** |  | [optional] 
-**OrderActivityCollection** | [**AnyOfExecution**](anyOf&lt;Execution&gt;.md) |  | [optional] 
+**OrderActivityCollection** | [**Execution**](Execution.md) |  | [optional] 
 **ReplacingOrderCollection** | **[]map[string]interface{}** |  | [optional] 
 **ChildOrderStrategies** | **[]map[string]interface{}** |  | [optional] 
 **StatusDescription** | **string** |  | [optional] 

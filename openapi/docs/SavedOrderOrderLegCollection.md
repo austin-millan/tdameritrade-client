@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderLegType** | [**AssetType**](AssetType.md) |  | [optional] 
 **LegId** | **float32** |  | [optional] 
-**Instrument** | [**AnyOfOptionMutualFundCashEquivalentEquityFixedIncome**](anyOf&lt;Option,MutualFund,CashEquivalent,Equity,FixedIncome&gt;.md) |  | [optional] 
+**Instrument** | [**InstrumentType**](InstrumentType.md) |  | [optional] 
 **Instruction** | [**Instruction**](Instruction.md) |  | [optional] 
 **PositionEffect** | [**PositionEffect**](PositionEffect.md) |  | [optional] 
 **Quantity** | **float32** |  | [optional] 

@@ -14,7 +14,7 @@ type SpecialInstruction string
 
 // List of SpecialInstruction
 const (
-	ALL_OR_NONE SpecialInstruction = "ALL_OR_NONE"
-	DO_NOT_REDUCE SpecialInstruction = "DO_NOT_REDUCE"
-	ALL_OR_NONE_DO_NOT_REDUCE SpecialInstruction = "ALL_OR_NONE_DO_NOT_REDUCE"
+	SPECIALINSTRUCTION_ALL_OR_NONE SpecialInstruction = "ALL_OR_NONE"
+	SPECIALINSTRUCTION_DO_NOT_REDUCE SpecialInstruction = "DO_NOT_REDUCE"
+	SPECIALINSTRUCTION_ALL_OR_NONE_DO_NOT_REDUCE SpecialInstruction = "ALL_OR_NONE_DO_NOT_REDUCE"
 )

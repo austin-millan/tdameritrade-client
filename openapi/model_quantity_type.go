@@ -14,7 +14,7 @@ type QuantityType string
 
 // List of QuantityType
 const (
-	ALL_SHARES QuantityType = "ALL_SHARES"
-	DOLLARS QuantityType = "DOLLARS"
-	SHARES QuantityType = "SHARES"
+	QUANTITYTYPE_ALL_SHARES QuantityType = "ALL_SHARES"
+	QUANTITYTYPE_DOLLARS QuantityType = "DOLLARS"
+	QUANTITYTYPE_SHARES QuantityType = "SHARES"
 )

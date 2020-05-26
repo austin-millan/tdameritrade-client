@@ -9,7 +9,9 @@ docker run \
     openapitools/openapi-generator-cli generate \
         -i /local/swagger.yml \
         -g go \
-        -o /local/openapi
+        -o /local/openapi \
+        -p enumClassPrefix=true \
+        -p skipFormModel=true
 rm openapi/api_*.go \
     openapi/.travis.yml \
     openapi/client.go \

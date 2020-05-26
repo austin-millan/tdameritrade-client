@@ -19,6 +19,6 @@ type CashAccountPositions struct {
 	SettledLongQuantity float32 `json:"settledLongQuantity,omitempty"`
 	SettledShortQuantity float32 `json:"settledShortQuantity,omitempty"`
 	AgedQuantity float32 `json:"agedQuantity,omitempty"`
-	Instrument AnyOfOptionMutualFundCashEquivalentEquityFixedIncome `json:"instrument,omitempty"`
+	Instrument InstrumentType `json:"instrument,omitempty"`
 	MarketValue float32 `json:"marketValue,omitempty"`
 }

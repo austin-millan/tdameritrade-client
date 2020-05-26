@@ -14,14 +14,14 @@ type TransactionType string
 
 // List of TransactionType
 const (
-	ALL TransactionType = "ALL"
-	TRADE TransactionType = "TRADE"
-	BUY_ONLY TransactionType = "BUY_ONLY"
-	SELL_ONLY TransactionType = "SELL_ONLY"
-	CASH_IN_OR_CASH_OUT TransactionType = "CASH_IN_OR_CASH_OUT"
-	CHECKING TransactionType = "CHECKING"
-	DIVIDEND TransactionType = "DIVIDEND"
-	INTEREST TransactionType = "INTEREST"
-	OTHER TransactionType = "OTHER"
-	ADVISOR_FEES TransactionType = "ADVISOR_FEES"
+	TRANSACTIONTYPE_ALL TransactionType = "ALL"
+	TRANSACTIONTYPE_TRADE TransactionType = "TRADE"
+	TRANSACTIONTYPE_BUY_ONLY TransactionType = "BUY_ONLY"
+	TRANSACTIONTYPE_SELL_ONLY TransactionType = "SELL_ONLY"
+	TRANSACTIONTYPE_CASH_IN_OR_CASH_OUT TransactionType = "CASH_IN_OR_CASH_OUT"
+	TRANSACTIONTYPE_CHECKING TransactionType = "CHECKING"
+	TRANSACTIONTYPE_DIVIDEND TransactionType = "DIVIDEND"
+	TRANSACTIONTYPE_INTEREST TransactionType = "INTEREST"
+	TRANSACTIONTYPE_OTHER TransactionType = "OTHER"
+	TRANSACTIONTYPE_ADVISOR_FEES TransactionType = "ADVISOR_FEES"
 )

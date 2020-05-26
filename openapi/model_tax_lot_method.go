@@ -14,10 +14,10 @@ type TaxLotMethod string
 
 // List of TaxLotMethod
 const (
-	FIFO TaxLotMethod = "FIFO"
-	LIFO TaxLotMethod = "LIFO"
-	HIGH_COST TaxLotMethod = "HIGH_COST"
-	LOW_COST TaxLotMethod = "LOW_COST"
-	AVERAGE_COST TaxLotMethod = "AVERAGE_COST"
-	SPECIFIC_LOT TaxLotMethod = "SPECIFIC_LOT"
+	TAXLOTMETHOD_FIFO TaxLotMethod = "FIFO"
+	TAXLOTMETHOD_LIFO TaxLotMethod = "LIFO"
+	TAXLOTMETHOD_HIGH_COST TaxLotMethod = "HIGH_COST"
+	TAXLOTMETHOD_LOW_COST TaxLotMethod = "LOW_COST"
+	TAXLOTMETHOD_AVERAGE_COST TaxLotMethod = "AVERAGE_COST"
+	TAXLOTMETHOD_SPECIFIC_LOT TaxLotMethod = "SPECIFIC_LOT"
 )

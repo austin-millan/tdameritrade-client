@@ -14,7 +14,7 @@ type PriceLinkType string
 
 // List of PriceLinkType
 const (
-	VALUE PriceLinkType = "VALUE"
-	PERCENT PriceLinkType = "PERCENT"
-	TICK PriceLinkType = "TICK"
+	PRICELINKTYPE_VALUE PriceLinkType = "VALUE"
+	PRICELINKTYPE_PERCENT PriceLinkType = "PERCENT"
+	PRICELINKTYPE_TICK PriceLinkType = "TICK"
 )
