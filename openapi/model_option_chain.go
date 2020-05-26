@@ -12,9 +12,9 @@ package openapi
 // OptionChain struct for OptionChain
 type OptionChain struct {
 	Symbol string `json:"symbol,omitempty"`
-	Status string `json:"status,omitempty"`
+	Status OrderStatus `json:"status,omitempty"`
 	Underlying OptionChainUnderlying `json:"underlying,omitempty"`
-	Strategy string `json:"strategy,omitempty"`
+	Strategy Strategy `json:"strategy,omitempty"`
 	Interval float32 `json:"interval,omitempty"`
 	IsDelayed bool `json:"isDelayed,omitempty"`
 	IsIndex bool `json:"isIndex,omitempty"`

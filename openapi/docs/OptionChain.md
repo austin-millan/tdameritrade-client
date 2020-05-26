@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | **string** |  | [optional] 
-**Status** | **string** |  | [optional] 
+**Status** | [**OrderStatus**](OrderStatus.md) |  | [optional] 
 **Underlying** | [**OptionChainUnderlying**](OptionChain_underlying.md) |  | [optional] 
-**Strategy** | **string** |  | [optional] 
+**Strategy** | [**Strategy**](Strategy.md) |  | [optional] 
 **Interval** | **float32** |  | [optional] 
 **IsDelayed** | **bool** |  | [optional] 
 **IsIndex** | **bool** |  | [optional] 

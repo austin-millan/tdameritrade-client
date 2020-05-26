@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 **UnderlyingSymbol** | **string** |  | [optional] 
 **OptionExpirationDate** | **string** |  | [optional] 
 **OptionStrikePrice** | **float32** |  | [optional] 
-**PutCall** | **string** |  | [optional] 
+**PutCall** | [**PutOrCall**](PutOrCall.md) |  | [optional] 
 **Cusip** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
-**AssetType** | **string** |  | [optional] 
+**AssetType** | [**AssetType**](AssetType.md) |  | [optional] 
 **BondMaturityDate** | **string** |  | [optional] 
 **BondInterestRate** | **float32** |  | [optional] 
 

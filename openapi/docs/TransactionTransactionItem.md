@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **Cost** | **float32** |  | [optional] 
 **ParentOrderKey** | **float32** |  | [optional] 
 **ParentChildIndicator** | **string** |  | [optional] 
-**Instruction** | **string** |  | [optional] 
-**PositionEffect** | **string** |  | [optional] 
+**Instruction** | [**Instruction**](Instruction.md) |  | [optional] 
+**PositionEffect** | [**PositionEffect**](PositionEffect.md) |  | [optional] 
 **Instrument** | [**TransactionTransactionItemInstrument**](Transaction_transactionItem_instrument.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -15,14 +15,14 @@ type UpdatePreferences struct {
 	DirectOptionsRouting bool `json:"directOptionsRouting,omitempty"`
 	DirectEquityRouting bool `json:"directEquityRouting,omitempty"`
 	DefaultEquityOrderLegInstruction string `json:"defaultEquityOrderLegInstruction,omitempty"`
-	DefaultEquityOrderType string `json:"defaultEquityOrderType,omitempty"`
-	DefaultEquityOrderPriceLinkType string `json:"defaultEquityOrderPriceLinkType,omitempty"`
-	DefaultEquityOrderDuration string `json:"defaultEquityOrderDuration,omitempty"`
-	DefaultEquityOrderMarketSession string `json:"defaultEquityOrderMarketSession,omitempty"`
+	DefaultEquityOrderType OrderType `json:"defaultEquityOrderType,omitempty"`
+	DefaultEquityOrderPriceLinkType EquityPriceLinkType `json:"defaultEquityOrderPriceLinkType,omitempty"`
+	DefaultEquityOrderDuration Duration `json:"defaultEquityOrderDuration,omitempty"`
+	DefaultEquityOrderMarketSession Session `json:"defaultEquityOrderMarketSession,omitempty"`
 	DefaultEquityQuantity int32 `json:"defaultEquityQuantity,omitempty"`
-	MutualFundTaxLotMethod string `json:"mutualFundTaxLotMethod,omitempty"`
-	OptionTaxLotMethod string `json:"optionTaxLotMethod,omitempty"`
-	EquityTaxLotMethod string `json:"equityTaxLotMethod,omitempty"`
+	MutualFundTaxLotMethod TaxLotMethod `json:"mutualFundTaxLotMethod,omitempty"`
+	OptionTaxLotMethod TaxLotMethod `json:"optionTaxLotMethod,omitempty"`
+	EquityTaxLotMethod TaxLotMethod `json:"equityTaxLotMethod,omitempty"`
 	DefaultAdvancedToolLaunch string `json:"defaultAdvancedToolLaunch,omitempty"`
 	AuthTokenTimeout string `json:"authTokenTimeout,omitempty"`
 }

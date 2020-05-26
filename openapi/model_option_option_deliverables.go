@@ -13,6 +13,6 @@ package openapi
 type OptionOptionDeliverables struct {
 	Symbol string `json:"symbol,omitempty"`
 	DeliverableUnits float32 `json:"deliverableUnits,omitempty"`
-	CurrencyType string `json:"currencyType,omitempty"`
-	AssetType string `json:"assetType,omitempty"`
+	CurrencyType CurrencyType `json:"currencyType,omitempty"`
+	AssetType AssetType `json:"assetType,omitempty"`
 }

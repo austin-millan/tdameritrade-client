@@ -11,5 +11,5 @@
 package openapi
 // Account struct for Account
 type Account struct {
-	SecuritiesAccount string `json:"securitiesAccount,omitempty"`
+	SecuritiesAccount AnyOfCashAccountMarginAccount `json:"securitiesAccount,omitempty"`
 }

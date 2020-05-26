@@ -29,7 +29,7 @@ type FutureOptions struct {
 	MultiplierInDouble float32 `json:"multiplierInDouble,omitempty"`
 	Digits float32 `json:"digits,omitempty"`
 	StrikePriceInDouble float32 `json:"strikePriceInDouble,omitempty"`
-	ContractType string `json:"contractType,omitempty"`
+	ContractType PutOrCall `json:"contractType,omitempty"`
 	Underlying string `json:"underlying,omitempty"`
 	TimeValueInDouble float32 `json:"timeValueInDouble,omitempty"`
 	DeltaInDouble float32 `json:"deltaInDouble,omitempty"`

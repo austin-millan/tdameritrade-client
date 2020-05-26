@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetType** | **string** |  | [optional] 
+**AssetType** | [**AssetType**](AssetType.md) |  | [optional] 
 **Cusip** | **string** |  | [optional] 
 **Symbol** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 

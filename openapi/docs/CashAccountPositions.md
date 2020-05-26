@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **SettledLongQuantity** | **float32** |  | [optional] 
 **SettledShortQuantity** | **float32** |  | [optional] 
 **AgedQuantity** | **float32** |  | [optional] 
-**Instrument** | **string** |  | [optional] 
+**Instrument** | [**AnyOfOptionMutualFundCashEquivalentEquityFixedIncome**](anyOf&lt;Option,MutualFund,CashEquivalent,Equity,FixedIncome&gt;.md) |  | [optional] 
 **MarketValue** | **float32** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -17,7 +17,7 @@ type MarginAccount struct {
 	IsDayTrader bool `json:"isDayTrader,omitempty"`
 	IsClosingOnlyRestricted bool `json:"isClosingOnlyRestricted,omitempty"`
 	Positions []CashAccountPositions `json:"positions,omitempty"`
-	OrderStrategies []CashAccountOrderStrategies `json:"orderStrategies,omitempty"`
+	OrderStrategies []MarginAccountOrderStrategies `json:"orderStrategies,omitempty"`
 	InitialBalances MarginAccountInitialBalances `json:"initialBalances,omitempty"`
 	CurrentBalances MarginAccountCurrentBalances `json:"currentBalances,omitempty"`
 	ProjectedBalances MarginAccountCurrentBalances `json:"projectedBalances,omitempty"`

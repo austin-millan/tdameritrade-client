@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **IsDayTrader** | **bool** |  | [optional] 
 **IsClosingOnlyRestricted** | **bool** |  | [optional] 
 **Positions** | [**[]CashAccountPositions**](CashAccount_positions.md) |  | [optional] 
-**OrderStrategies** | [**[]CashAccountOrderStrategies**](CashAccount_orderStrategies.md) |  | [optional] 
+**OrderStrategies** | [**[]MarginAccountOrderStrategies**](MarginAccount_orderStrategies.md) |  | [optional] 
 **InitialBalances** | [**MarginAccountInitialBalances**](MarginAccount_initialBalances.md) |  | [optional] 
 **CurrentBalances** | [**MarginAccountCurrentBalances**](MarginAccount_currentBalances.md) |  | [optional] 
 **ProjectedBalances** | [**MarginAccountCurrentBalances**](MarginAccount_currentBalances.md) |  | [optional] 

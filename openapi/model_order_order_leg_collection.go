@@ -11,11 +11,11 @@
 package openapi
 // OrderOrderLegCollection struct for OrderOrderLegCollection
 type OrderOrderLegCollection struct {
-	OrderLegType string `json:"orderLegType,omitempty"`
+	OrderLegType OrderType `json:"orderLegType,omitempty"`
 	LegId float32 `json:"legId,omitempty"`
-	Instrument string `json:"instrument,omitempty"`
-	Instruction string `json:"instruction,omitempty"`
-	PositionEffect string `json:"positionEffect,omitempty"`
+	Instrument AnyOfOptionMutualFundCashEquivalentEquityFixedIncome `json:"instrument,omitempty"`
+	Instruction Instruction `json:"instruction,omitempty"`
+	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
 	Quantity float32 `json:"quantity,omitempty"`
-	QuantityType string `json:"quantityType,omitempty"`
+	QuantityType QuantityType `json:"quantityType,omitempty"`
 }

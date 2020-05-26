@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **MultiplierInDouble** | **float32** |  | [optional] 
 **Digits** | **float32** |  | [optional] 
 **StrikePriceInDouble** | **float32** |  | [optional] 
-**ContractType** | **string** |  | [optional] 
+**ContractType** | [**PutOrCall**](PutOrCall.md) |  | [optional] 
 **Underlying** | **string** |  | [optional] 
 **TimeValueInDouble** | **float32** |  | [optional] 
 **DeltaInDouble** | **float32** |  | [optional] 

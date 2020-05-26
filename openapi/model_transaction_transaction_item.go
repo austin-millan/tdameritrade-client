@@ -17,7 +17,7 @@ type TransactionTransactionItem struct {
 	Cost float32 `json:"cost,omitempty"`
 	ParentOrderKey float32 `json:"parentOrderKey,omitempty"`
 	ParentChildIndicator string `json:"parentChildIndicator,omitempty"`
-	Instruction string `json:"instruction,omitempty"`
-	PositionEffect string `json:"positionEffect,omitempty"`
+	Instruction Instruction `json:"instruction,omitempty"`
+	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
 	Instrument TransactionTransactionItemInstrument `json:"instrument,omitempty"`
 }
