@@ -1,2 +1,2 @@
-module gitlab.com/trade-hawk/tdameritrade-openapi
+module gitlab.com/brokerage-api/tdameritrade-openapi
 go 1.13
