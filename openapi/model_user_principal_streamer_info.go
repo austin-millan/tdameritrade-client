@@ -11,12 +11,12 @@
 package openapi
 // UserPrincipalStreamerInfo struct for UserPrincipalStreamerInfo
 type UserPrincipalStreamerInfo struct {
+	AccessLevel string `json:"accessLevel,omitempty"`
+	Acl string `json:"acl,omitempty"`
+	AppId string `json:"appId,omitempty"`
 	StreamerBinaryUrl string `json:"streamerBinaryUrl,omitempty"`
 	StreamerSocketUrl string `json:"streamerSocketUrl,omitempty"`
 	Token string `json:"token,omitempty"`
 	TokenTimestamp string `json:"tokenTimestamp,omitempty"`
 	UserGroup string `json:"userGroup,omitempty"`
-	AccessLevel string `json:"accessLevel,omitempty"`
-	Acl string `json:"acl,omitempty"`
-	AppId string `json:"appId,omitempty"`
 }

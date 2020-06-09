@@ -11,18 +11,18 @@
 package openapi
 // UserPrincipal struct for UserPrincipal
 type UserPrincipal struct {
-	AuthToken string `json:"authToken,omitempty"`
-	UserId string `json:"userId,omitempty"`
-	UserCdDomainId string `json:"userCdDomainId,omitempty"`
-	PrimaryAccountId string `json:"primaryAccountId,omitempty"`
-	LastLoginTime string `json:"lastLoginTime,omitempty"`
-	TokenExpirationTime string `json:"tokenExpirationTime,omitempty"`
-	LoginTime string `json:"loginTime,omitempty"`
 	AccessLevel string `json:"accessLevel,omitempty"`
-	StalePassword bool `json:"stalePassword,omitempty"`
-	StreamerInfo UserPrincipalStreamerInfo `json:"streamerInfo,omitempty"`
+	Accounts []UserPrincipalAccounts `json:"accounts,omitempty"`
+	AuthToken string `json:"authToken,omitempty"`
+	LastLoginTime string `json:"lastLoginTime,omitempty"`
+	LoginTime string `json:"loginTime,omitempty"`
+	PrimaryAccountId string `json:"primaryAccountId,omitempty"`
 	ProfessionalStatus string `json:"professionalStatus,omitempty"`
 	Quotes UserPrincipalQuotes `json:"quotes,omitempty"`
+	StalePassword bool `json:"stalePassword,omitempty"`
+	StreamerInfo UserPrincipalStreamerInfo `json:"streamerInfo,omitempty"`
 	StreamerSubscriptionKeys UserPrincipalStreamerSubscriptionKeys `json:"streamerSubscriptionKeys,omitempty"`
-	Accounts []UserPrincipalAccounts `json:"accounts,omitempty"`
+	TokenExpirationTime string `json:"tokenExpirationTime,omitempty"`
+	UserCdDomainId string `json:"userCdDomainId,omitempty"`
+	UserId string `json:"userId,omitempty"`
 }

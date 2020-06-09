@@ -12,9 +12,9 @@ package openapi
 // EasObject struct for EasObject
 type EasObject struct {
 	AccessToken string `json:"access_token,omitempty"`
-	RefreshToken string `json:"refresh_token,omitempty"`
-	TokenType string `json:"token_type,omitempty"`
 	ExpiresIn float32 `json:"expires_in,omitempty"`
-	Scope string `json:"scope,omitempty"`
+	RefreshToken string `json:"refresh_token,omitempty"`
 	RefreshTokenExpiresIn float32 `json:"refresh_token_expires_in,omitempty"`
+	Scope string `json:"scope,omitempty"`
+	TokenType string `json:"token_type,omitempty"`
 }

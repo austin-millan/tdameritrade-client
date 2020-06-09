@@ -12,8 +12,8 @@ package openapi
 // Execution struct for Execution
 type Execution struct {
 	ActivityType string `json:"activityType,omitempty"`
-	ExecutionType string `json:"executionType,omitempty"`
-	Quantity float32 `json:"quantity,omitempty"`
-	OrderRemainingQuantity float32 `json:"orderRemainingQuantity,omitempty"`
 	ExecutionLegs []ExecutionExecutionLegs `json:"executionLegs,omitempty"`
+	ExecutionType string `json:"executionType,omitempty"`
+	OrderRemainingQuantity float32 `json:"orderRemainingQuantity,omitempty"`
+	Quantity float32 `json:"quantity,omitempty"`
 }

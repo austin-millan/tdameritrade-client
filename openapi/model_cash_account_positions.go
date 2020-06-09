@@ -11,14 +11,14 @@
 package openapi
 // CashAccountPositions struct for CashAccountPositions
 type CashAccountPositions struct {
-	ShortQuantity float32 `json:"shortQuantity,omitempty"`
+	AgedQuantity float32 `json:"agedQuantity,omitempty"`
 	AveragePrice float32 `json:"averagePrice,omitempty"`
 	CurrentDayProfitLoss float32 `json:"currentDayProfitLoss,omitempty"`
 	CurrentDayProfitLossPercentage float32 `json:"currentDayProfitLossPercentage,omitempty"`
+	Instrument InstrumentType `json:"instrument,omitempty"`
 	LongQuantity float32 `json:"longQuantity,omitempty"`
+	MarketValue float32 `json:"marketValue,omitempty"`
 	SettledLongQuantity float32 `json:"settledLongQuantity,omitempty"`
 	SettledShortQuantity float32 `json:"settledShortQuantity,omitempty"`
-	AgedQuantity float32 `json:"agedQuantity,omitempty"`
-	Instrument InstrumentType `json:"instrument,omitempty"`
-	MarketValue float32 `json:"marketValue,omitempty"`
+	ShortQuantity float32 `json:"shortQuantity,omitempty"`
 }

@@ -11,20 +11,20 @@
 package openapi
 // Index struct for Index
 type Index struct {
-	Symbol string `json:"symbol,omitempty"`
-	Description string `json:"description,omitempty"`
-	LastPrice float32 `json:"lastPrice,omitempty"`
-	OpenPrice float32 `json:"openPrice,omitempty"`
-	HighPrice float32 `json:"highPrice,omitempty"`
-	LowPrice float32 `json:"lowPrice,omitempty"`
-	ClosePrice float32 `json:"closePrice,omitempty"`
-	NetChange float32 `json:"netChange,omitempty"`
-	TotalVolume float32 `json:"totalVolume,omitempty"`
-	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
-	Exchange string `json:"exchange,omitempty"`
-	ExchangeName string `json:"exchangeName,omitempty"`
-	Digits float32 `json:"digits,omitempty"`
 	Var52WkHigh float32 `json:"52WkHigh,omitempty"`
 	Var52WkLow float32 `json:"52WkLow,omitempty"`
+	ClosePrice float32 `json:"closePrice,omitempty"`
+	Description string `json:"description,omitempty"`
+	Digits float32 `json:"digits,omitempty"`
+	Exchange string `json:"exchange,omitempty"`
+	ExchangeName string `json:"exchangeName,omitempty"`
+	HighPrice float32 `json:"highPrice,omitempty"`
+	LastPrice float32 `json:"lastPrice,omitempty"`
+	LowPrice float32 `json:"lowPrice,omitempty"`
+	NetChange float32 `json:"netChange,omitempty"`
+	OpenPrice float32 `json:"openPrice,omitempty"`
 	SecurityStatus string `json:"securityStatus,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	TotalVolume float32 `json:"totalVolume,omitempty"`
+	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
 }

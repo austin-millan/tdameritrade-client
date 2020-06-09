@@ -13,11 +13,11 @@ package openapi
 type Option struct {
 	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
-	Type OptionType `json:"type,omitempty"`
-	PutCall PutOrCall `json:"putCall,omitempty"`
-	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
-	OptionMultiplier float32 `json:"optionMultiplier,omitempty"`
 	OptionDeliverables []OptionOptionDeliverables `json:"optionDeliverables,omitempty"`
+	OptionMultiplier float32 `json:"optionMultiplier,omitempty"`
+	PutCall PutOrCall `json:"putCall,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	Type OptionType `json:"type,omitempty"`
+	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
 }

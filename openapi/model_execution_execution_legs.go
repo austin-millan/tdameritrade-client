@@ -12,8 +12,8 @@ package openapi
 // ExecutionExecutionLegs struct for ExecutionExecutionLegs
 type ExecutionExecutionLegs struct {
 	LegId float32 `json:"legId,omitempty"`
-	Quantity float32 `json:"quantity,omitempty"`
 	MismarkedQuantity float32 `json:"mismarkedQuantity,omitempty"`
 	Price float32 `json:"price,omitempty"`
+	Quantity float32 `json:"quantity,omitempty"`
 	Time string `json:"time,omitempty"`
 }

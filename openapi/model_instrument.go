@@ -11,9 +11,9 @@
 package openapi
 // Instrument struct for Instrument
 type Instrument struct {
+	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
 	Exchange string `json:"exchange,omitempty"`
-	AssetType AssetType `json:"assetType,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

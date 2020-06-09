@@ -11,7 +11,7 @@
 package openapi
 // WatchlistInstrument struct for WatchlistInstrument
 type WatchlistInstrument struct {
-	Symbol string `json:"symbol,omitempty"`
-	Description string `json:"description,omitempty"`
 	AssetType AssetType `json:"assetType,omitempty"`
+	Description string `json:"description,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

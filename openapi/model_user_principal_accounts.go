@@ -11,14 +11,14 @@
 package openapi
 // UserPrincipalAccounts struct for UserPrincipalAccounts
 type UserPrincipalAccounts struct {
-	AccountId string `json:"accountId,omitempty"`
-	Description string `json:"description,omitempty"`
-	DisplayName string `json:"displayName,omitempty"`
 	AccountCdDomainId string `json:"accountCdDomainId,omitempty"`
-	Company string `json:"company,omitempty"`
-	Segment string `json:"segment,omitempty"`
-	SurrogateIds string `json:"surrogateIds,omitempty"`
-	Preferences UserPrincipalPreferences `json:"preferences,omitempty"`
+	AccountId string `json:"accountId,omitempty"`
 	Acl string `json:"acl,omitempty"`
 	Authorizations UserPrincipalAuthorizations `json:"authorizations,omitempty"`
+	Company string `json:"company,omitempty"`
+	Description string `json:"description,omitempty"`
+	DisplayName string `json:"displayName,omitempty"`
+	Preferences UserPrincipalPreferences `json:"preferences,omitempty"`
+	Segment string `json:"segment,omitempty"`
+	SurrogateIds string `json:"surrogateIds,omitempty"`
 }

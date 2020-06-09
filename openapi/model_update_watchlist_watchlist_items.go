@@ -11,10 +11,10 @@
 package openapi
 // UpdateWatchlistWatchlistItems struct for UpdateWatchlistWatchlistItems
 type UpdateWatchlistWatchlistItems struct {
-	Quantity int32 `json:"quantity,omitempty"`
 	AveragePrice int32 `json:"averagePrice,omitempty"`
 	Commission int32 `json:"commission,omitempty"`
-	PurchasedDate string `json:"purchasedDate,omitempty"`
 	Instrument CreateWatchlistInstrument `json:"instrument,omitempty"`
+	PurchasedDate string `json:"purchasedDate,omitempty"`
+	Quantity int32 `json:"quantity,omitempty"`
 	SequenceId int32 `json:"sequenceId,omitempty"`
 }

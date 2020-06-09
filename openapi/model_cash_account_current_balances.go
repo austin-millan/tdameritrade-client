@@ -12,23 +12,23 @@ package openapi
 // CashAccountCurrentBalances struct for CashAccountCurrentBalances
 type CashAccountCurrentBalances struct {
 	AccruedInterest float32 `json:"accruedInterest,omitempty"`
-	CashBalance float32 `json:"cashBalance,omitempty"`
-	CashReceipts float32 `json:"cashReceipts,omitempty"`
-	LongOptionMarketValue float32 `json:"longOptionMarketValue,omitempty"`
-	LiquidationValue float32 `json:"liquidationValue,omitempty"`
-	LongMarketValue float32 `json:"longMarketValue,omitempty"`
-	MoneyMarketFund float32 `json:"moneyMarketFund,omitempty"`
-	Savings float32 `json:"savings,omitempty"`
-	ShortMarketValue float32 `json:"shortMarketValue,omitempty"`
-	PendingDeposits float32 `json:"pendingDeposits,omitempty"`
+	BondValue float32 `json:"bondValue,omitempty"`
 	CashAvailableForTrading float32 `json:"cashAvailableForTrading,omitempty"`
 	CashAvailableForWithdrawal float32 `json:"cashAvailableForWithdrawal,omitempty"`
+	CashBalance float32 `json:"cashBalance,omitempty"`
 	CashCall float32 `json:"cashCall,omitempty"`
-	LongNonMarginableMarketValue float32 `json:"longNonMarginableMarketValue,omitempty"`
-	TotalCash float32 `json:"totalCash,omitempty"`
-	ShortOptionMarketValue float32 `json:"shortOptionMarketValue,omitempty"`
-	MutualFundValue float32 `json:"mutualFundValue,omitempty"`
-	BondValue float32 `json:"bondValue,omitempty"`
 	CashDebitCallValue float32 `json:"cashDebitCallValue,omitempty"`
+	CashReceipts float32 `json:"cashReceipts,omitempty"`
+	LiquidationValue float32 `json:"liquidationValue,omitempty"`
+	LongMarketValue float32 `json:"longMarketValue,omitempty"`
+	LongNonMarginableMarketValue float32 `json:"longNonMarginableMarketValue,omitempty"`
+	LongOptionMarketValue float32 `json:"longOptionMarketValue,omitempty"`
+	MoneyMarketFund float32 `json:"moneyMarketFund,omitempty"`
+	MutualFundValue float32 `json:"mutualFundValue,omitempty"`
+	PendingDeposits float32 `json:"pendingDeposits,omitempty"`
+	Savings float32 `json:"savings,omitempty"`
+	ShortMarketValue float32 `json:"shortMarketValue,omitempty"`
+	ShortOptionMarketValue float32 `json:"shortOptionMarketValue,omitempty"`
+	TotalCash float32 `json:"totalCash,omitempty"`
 	UnsettledCash float32 `json:"unsettledCash,omitempty"`
 }

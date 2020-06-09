@@ -11,18 +11,18 @@
 package openapi
 // UpdatePreferences struct for UpdatePreferences
 type UpdatePreferences struct {
-	ExpressTrading bool `json:"expressTrading,omitempty"`
-	DirectOptionsRouting bool `json:"directOptionsRouting,omitempty"`
-	DirectEquityRouting bool `json:"directEquityRouting,omitempty"`
-	DefaultEquityOrderLegInstruction string `json:"defaultEquityOrderLegInstruction,omitempty"`
-	DefaultEquityOrderType OrderType `json:"defaultEquityOrderType,omitempty"`
-	DefaultEquityOrderPriceLinkType EquityPriceLinkType `json:"defaultEquityOrderPriceLinkType,omitempty"`
+	AuthTokenTimeout string `json:"authTokenTimeout,omitempty"`
+	DefaultAdvancedToolLaunch string `json:"defaultAdvancedToolLaunch,omitempty"`
 	DefaultEquityOrderDuration Duration `json:"defaultEquityOrderDuration,omitempty"`
+	DefaultEquityOrderLegInstruction string `json:"defaultEquityOrderLegInstruction,omitempty"`
 	DefaultEquityOrderMarketSession Session `json:"defaultEquityOrderMarketSession,omitempty"`
+	DefaultEquityOrderPriceLinkType EquityPriceLinkType `json:"defaultEquityOrderPriceLinkType,omitempty"`
+	DefaultEquityOrderType OrderType `json:"defaultEquityOrderType,omitempty"`
 	DefaultEquityQuantity int32 `json:"defaultEquityQuantity,omitempty"`
+	DirectEquityRouting bool `json:"directEquityRouting,omitempty"`
+	DirectOptionsRouting bool `json:"directOptionsRouting,omitempty"`
+	EquityTaxLotMethod TaxLotMethod `json:"equityTaxLotMethod,omitempty"`
+	ExpressTrading bool `json:"expressTrading,omitempty"`
 	MutualFundTaxLotMethod TaxLotMethod `json:"mutualFundTaxLotMethod,omitempty"`
 	OptionTaxLotMethod TaxLotMethod `json:"optionTaxLotMethod,omitempty"`
-	EquityTaxLotMethod TaxLotMethod `json:"equityTaxLotMethod,omitempty"`
-	DefaultAdvancedToolLaunch string `json:"defaultAdvancedToolLaunch,omitempty"`
-	AuthTokenTimeout string `json:"authTokenTimeout,omitempty"`
 }

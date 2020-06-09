@@ -11,50 +11,50 @@
 package openapi
 // FundamentalFundamental struct for FundamentalFundamental
 type FundamentalFundamental struct {
-	Symbol string `json:"symbol,omitempty"`
-	High52 float32 `json:"high52,omitempty"`
-	Low52 float32 `json:"low52,omitempty"`
-	DividendAmount float32 `json:"dividendAmount,omitempty"`
-	DividendYield float32 `json:"dividendYield,omitempty"`
-	DividendDate string `json:"dividendDate,omitempty"`
-	PeRatio float32 `json:"peRatio,omitempty"`
-	PegRatio float32 `json:"pegRatio,omitempty"`
-	PbRatio float32 `json:"pbRatio,omitempty"`
-	PrRatio float32 `json:"prRatio,omitempty"`
-	PcfRatio float32 `json:"pcfRatio,omitempty"`
-	GrossMarginTTM float32 `json:"grossMarginTTM,omitempty"`
-	GrossMarginMRQ float32 `json:"grossMarginMRQ,omitempty"`
-	NetProfitMarginTTM float32 `json:"netProfitMarginTTM,omitempty"`
-	NetProfitMarginMRQ float32 `json:"netProfitMarginMRQ,omitempty"`
-	OperatingMarginTTM float32 `json:"operatingMarginTTM,omitempty"`
-	OperatingMarginMRQ float32 `json:"operatingMarginMRQ,omitempty"`
-	ReturnOnEquity float32 `json:"returnOnEquity,omitempty"`
-	ReturnOnAssets float32 `json:"returnOnAssets,omitempty"`
-	ReturnOnInvestment float32 `json:"returnOnInvestment,omitempty"`
-	QuickRatio float32 `json:"quickRatio,omitempty"`
-	CurrentRatio float32 `json:"currentRatio,omitempty"`
-	InterestCoverage float32 `json:"interestCoverage,omitempty"`
-	TotalDebtToCapital float32 `json:"totalDebtToCapital,omitempty"`
-	LtDebtToEquity float32 `json:"ltDebtToEquity,omitempty"`
-	TotalDebtToEquity float32 `json:"totalDebtToEquity,omitempty"`
-	EpsTTM float32 `json:"epsTTM,omitempty"`
-	EpsChangePercentTTM float32 `json:"epsChangePercentTTM,omitempty"`
-	EpsChangeYear float32 `json:"epsChangeYear,omitempty"`
-	EpsChange float32 `json:"epsChange,omitempty"`
-	RevChangeYear float32 `json:"revChangeYear,omitempty"`
-	RevChangeTTM float32 `json:"revChangeTTM,omitempty"`
-	RevChangeIn float32 `json:"revChangeIn,omitempty"`
-	SharesOutstanding float32 `json:"sharesOutstanding,omitempty"`
-	MarketCapFloat float32 `json:"marketCapFloat,omitempty"`
-	MarketCap float32 `json:"marketCap,omitempty"`
+	Beta float32 `json:"beta,omitempty"`
 	BookValuePerShare float32 `json:"bookValuePerShare,omitempty"`
-	ShortIntToFloat float32 `json:"shortIntToFloat,omitempty"`
-	ShortIntDayToCover float32 `json:"shortIntDayToCover,omitempty"`
+	CurrentRatio float32 `json:"currentRatio,omitempty"`
 	DivGrowthRate3Year float32 `json:"divGrowthRate3Year,omitempty"`
+	DividendAmount float32 `json:"dividendAmount,omitempty"`
+	DividendDate string `json:"dividendDate,omitempty"`
 	DividendPayAmount float32 `json:"dividendPayAmount,omitempty"`
 	DividendPayDate string `json:"dividendPayDate,omitempty"`
-	Beta float32 `json:"beta,omitempty"`
-	Vol1DayAvg float32 `json:"vol1DayAvg,omitempty"`
+	DividendYield float32 `json:"dividendYield,omitempty"`
+	EpsChange float32 `json:"epsChange,omitempty"`
+	EpsChangePercentTTM float32 `json:"epsChangePercentTTM,omitempty"`
+	EpsChangeYear float32 `json:"epsChangeYear,omitempty"`
+	EpsTTM float32 `json:"epsTTM,omitempty"`
+	GrossMarginMRQ float32 `json:"grossMarginMRQ,omitempty"`
+	GrossMarginTTM float32 `json:"grossMarginTTM,omitempty"`
+	High52 float32 `json:"high52,omitempty"`
+	InterestCoverage float32 `json:"interestCoverage,omitempty"`
+	Low52 float32 `json:"low52,omitempty"`
+	LtDebtToEquity float32 `json:"ltDebtToEquity,omitempty"`
+	MarketCap float32 `json:"marketCap,omitempty"`
+	MarketCapFloat float32 `json:"marketCapFloat,omitempty"`
+	NetProfitMarginMRQ float32 `json:"netProfitMarginMRQ,omitempty"`
+	NetProfitMarginTTM float32 `json:"netProfitMarginTTM,omitempty"`
+	OperatingMarginMRQ float32 `json:"operatingMarginMRQ,omitempty"`
+	OperatingMarginTTM float32 `json:"operatingMarginTTM,omitempty"`
+	PbRatio float32 `json:"pbRatio,omitempty"`
+	PcfRatio float32 `json:"pcfRatio,omitempty"`
+	PeRatio float32 `json:"peRatio,omitempty"`
+	PegRatio float32 `json:"pegRatio,omitempty"`
+	PrRatio float32 `json:"prRatio,omitempty"`
+	QuickRatio float32 `json:"quickRatio,omitempty"`
+	ReturnOnAssets float32 `json:"returnOnAssets,omitempty"`
+	ReturnOnEquity float32 `json:"returnOnEquity,omitempty"`
+	ReturnOnInvestment float32 `json:"returnOnInvestment,omitempty"`
+	RevChangeIn float32 `json:"revChangeIn,omitempty"`
+	RevChangeTTM float32 `json:"revChangeTTM,omitempty"`
+	RevChangeYear float32 `json:"revChangeYear,omitempty"`
+	SharesOutstanding float32 `json:"sharesOutstanding,omitempty"`
+	ShortIntDayToCover float32 `json:"shortIntDayToCover,omitempty"`
+	ShortIntToFloat float32 `json:"shortIntToFloat,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	TotalDebtToCapital float32 `json:"totalDebtToCapital,omitempty"`
+	TotalDebtToEquity float32 `json:"totalDebtToEquity,omitempty"`
 	Vol10DayAvg float32 `json:"vol10DayAvg,omitempty"`
+	Vol1DayAvg float32 `json:"vol1DayAvg,omitempty"`
 	Vol3MonthAvg float32 `json:"vol3MonthAvg,omitempty"`
 }

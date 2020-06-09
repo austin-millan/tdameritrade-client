@@ -11,41 +11,41 @@
 package openapi
 // SavedOrder struct for SavedOrder
 type SavedOrder struct {
-	Session Session `json:"session,omitempty"`
-	Duration Duration `json:"duration,omitempty"`
-	OrderType OrderType `json:"orderType,omitempty"`
-	CancelTime OrderCancelTime `json:"cancelTime,omitempty"`
+	AccountId float32 `json:"accountId,omitempty"`
+	ActivationPrice float32 `json:"activationPrice,omitempty"`
+	CancelTime CashAccountCancelTime `json:"cancelTime,omitempty"`
+	Cancelable bool `json:"cancelable,omitempty"`
+	ChildOrderStrategies []SavedOrderChildOrderStrategies `json:"childOrderStrategies,omitempty"`
+	CloseTime string `json:"closeTime,omitempty"`
 	ComplexOrderStrategyType ComplexOrderStrategyType `json:"complexOrderStrategyType,omitempty"`
-	Quantity float32 `json:"quantity,omitempty"`
+	DestinationLinkName string `json:"destinationLinkName,omitempty"`
+	Duration Duration `json:"duration,omitempty"`
+	Editable bool `json:"editable,omitempty"`
+	EnteredTime string `json:"enteredTime,omitempty"`
 	FilledQuantity float32 `json:"filledQuantity,omitempty"`
+	OrderActivityCollection []Execution `json:"orderActivityCollection,omitempty"`
+	OrderId float32 `json:"orderId,omitempty"`
+	OrderLegCollection []CashAccountOrderLegCollection `json:"orderLegCollection,omitempty"`
+	OrderStrategyType OrderStrategyType `json:"orderStrategyType,omitempty"`
+	OrderType OrderType `json:"orderType,omitempty"`
+	Price float32 `json:"price,omitempty"`
+	PriceLinkBasis PriceLinkBasis `json:"priceLinkBasis,omitempty"`
+	PriceLinkType PriceLinkType `json:"priceLinkType,omitempty"`
+	Quantity float32 `json:"quantity,omitempty"`
+	ReleaseTime string `json:"releaseTime,omitempty"`
 	RemainingQuantity float32 `json:"remainingQuantity,omitempty"`
 	RequestedDestination DestinationExchange `json:"requestedDestination,omitempty"`
-	DestinationLinkName string `json:"destinationLinkName,omitempty"`
-	ReleaseTime string `json:"releaseTime,omitempty"`
+	SavedOrderId float32 `json:"savedOrderId,omitempty"`
+	SavedTime string `json:"savedTime,omitempty"`
+	Session Session `json:"session,omitempty"`
+	SpecialInstruction SpecialInstruction `json:"specialInstruction,omitempty"`
+	Status OrderStatus `json:"status,omitempty"`
+	StatusDescription string `json:"statusDescription,omitempty"`
 	StopPrice float32 `json:"stopPrice,omitempty"`
 	StopPriceLinkBasis PriceLinkBasis `json:"stopPriceLinkBasis,omitempty"`
 	StopPriceLinkType PriceLinkType `json:"stopPriceLinkType,omitempty"`
 	StopPriceOffset float32 `json:"stopPriceOffset,omitempty"`
 	StopType StopType `json:"stopType,omitempty"`
-	PriceLinkBasis PriceLinkBasis `json:"priceLinkBasis,omitempty"`
-	PriceLinkType PriceLinkType `json:"priceLinkType,omitempty"`
-	Price float32 `json:"price,omitempty"`
-	TaxLotMethod TaxLotMethod `json:"taxLotMethod,omitempty"`
-	OrderLegCollection []SavedOrderOrderLegCollection `json:"orderLegCollection,omitempty"`
-	ActivationPrice float32 `json:"activationPrice,omitempty"`
-	SpecialInstruction SpecialInstruction `json:"specialInstruction,omitempty"`
-	OrderStrategyType OrderStrategyType `json:"orderStrategyType,omitempty"`
-	OrderId float32 `json:"orderId,omitempty"`
-	Cancelable bool `json:"cancelable,omitempty"`
-	Editable bool `json:"editable,omitempty"`
-	Status OrderStatus `json:"status,omitempty"`
-	EnteredTime string `json:"enteredTime,omitempty"`
-	CloseTime string `json:"closeTime,omitempty"`
 	Tag string `json:"tag,omitempty"`
-	AccountId float32 `json:"accountId,omitempty"`
-	OrderActivityCollection []Execution `json:"orderActivityCollection,omitempty"`
-	ChildOrderStrategies []SavedOrderChildOrderStrategies `json:"childOrderStrategies,omitempty"`
-	StatusDescription string `json:"statusDescription,omitempty"`
-	SavedOrderId float32 `json:"savedOrderId,omitempty"`
-	SavedTime string `json:"savedTime,omitempty"`
+	TaxLotMethod TaxLotMethod `json:"taxLotMethod,omitempty"`
 }

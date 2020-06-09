@@ -13,14 +13,14 @@ package openapi
 type InstrumentType struct {
 	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
-	Type string `json:"type,omitempty"`
-	PutCall PutOrCall `json:"putCall,omitempty"`
-	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
-	OptionMultiplier float32 `json:"optionMultiplier,omitempty"`
 	OptionDeliverables []OptionOptionDeliverables `json:"optionDeliverables,omitempty"`
+	OptionMultiplier float32 `json:"optionMultiplier,omitempty"`
+	PutCall PutOrCall `json:"putCall,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	Type string `json:"type,omitempty"`
+	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
+	Factor float32 `json:"factor,omitempty"`
 	MaturityDate string `json:"maturityDate,omitempty"`
 	VariableRate float32 `json:"variableRate,omitempty"`
-	Factor float32 `json:"factor,omitempty"`
 }

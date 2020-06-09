@@ -11,14 +11,14 @@
 package openapi
 // CashAccount struct for CashAccount
 type CashAccount struct {
-	Type string `json:"type,omitempty"`
 	AccountId string `json:"accountId,omitempty"`
-	RoundTrips float32 `json:"roundTrips,omitempty"`
-	IsDayTrader bool `json:"isDayTrader,omitempty"`
-	IsClosingOnlyRestricted bool `json:"isClosingOnlyRestricted,omitempty"`
-	Positions []CashAccountPositions `json:"positions,omitempty"`
-	OrderStrategies []CashAccountOrderStrategies `json:"orderStrategies,omitempty"`
-	InitialBalances CashAccountInitialBalances `json:"initialBalances,omitempty"`
 	CurrentBalances CashAccountCurrentBalances `json:"currentBalances,omitempty"`
+	InitialBalances CashAccountInitialBalances `json:"initialBalances,omitempty"`
+	IsClosingOnlyRestricted bool `json:"isClosingOnlyRestricted,omitempty"`
+	IsDayTrader bool `json:"isDayTrader,omitempty"`
+	OrderStrategies []CashAccountOrderStrategies `json:"orderStrategies,omitempty"`
+	Positions []CashAccountPositions `json:"positions,omitempty"`
 	ProjectedBalances CashAccountCurrentBalances `json:"projectedBalances,omitempty"`
+	RoundTrips float32 `json:"roundTrips,omitempty"`
+	Type string `json:"type,omitempty"`
 }

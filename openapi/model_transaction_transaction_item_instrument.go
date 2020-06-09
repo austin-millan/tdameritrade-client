@@ -11,14 +11,14 @@
 package openapi
 // TransactionTransactionItemInstrument struct for TransactionTransactionItemInstrument
 type TransactionTransactionItemInstrument struct {
-	Symbol string `json:"symbol,omitempty"`
-	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
+	AssetType AssetType `json:"assetType,omitempty"`
+	BondInterestRate float32 `json:"bondInterestRate,omitempty"`
+	BondMaturityDate string `json:"bondMaturityDate,omitempty"`
+	Cusip string `json:"cusip,omitempty"`
+	Description string `json:"description,omitempty"`
 	OptionExpirationDate string `json:"optionExpirationDate,omitempty"`
 	OptionStrikePrice float32 `json:"optionStrikePrice,omitempty"`
 	PutCall PutOrCall `json:"putCall,omitempty"`
-	Cusip string `json:"cusip,omitempty"`
-	Description string `json:"description,omitempty"`
-	AssetType AssetType `json:"assetType,omitempty"`
-	BondMaturityDate string `json:"bondMaturityDate,omitempty"`
-	BondInterestRate float32 `json:"bondInterestRate,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	UnderlyingSymbol string `json:"underlyingSymbol,omitempty"`
 }

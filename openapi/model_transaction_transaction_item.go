@@ -13,11 +13,11 @@ package openapi
 type TransactionTransactionItem struct {
 	AccountId float32 `json:"accountId,omitempty"`
 	Amount float32 `json:"amount,omitempty"`
-	Price float32 `json:"price,omitempty"`
 	Cost float32 `json:"cost,omitempty"`
-	ParentOrderKey float32 `json:"parentOrderKey,omitempty"`
-	ParentChildIndicator string `json:"parentChildIndicator,omitempty"`
 	Instruction Instruction `json:"instruction,omitempty"`
-	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
 	Instrument TransactionTransactionItemInstrument `json:"instrument,omitempty"`
+	ParentChildIndicator string `json:"parentChildIndicator,omitempty"`
+	ParentOrderKey float32 `json:"parentOrderKey,omitempty"`
+	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
+	Price float32 `json:"price,omitempty"`
 }

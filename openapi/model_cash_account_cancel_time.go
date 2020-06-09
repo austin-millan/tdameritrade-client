@@ -9,8 +9,8 @@
  */
 
 package openapi
-// CreateWatchlistInstrument struct for CreateWatchlistInstrument
-type CreateWatchlistInstrument struct {
-	AssetType AssetType `json:"assetType,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
+// CashAccountCancelTime struct for CashAccountCancelTime
+type CashAccountCancelTime struct {
+	Date string `json:"date,omitempty"`
+	ShortFormat bool `json:"shortFormat,omitempty"`
 }

@@ -9,12 +9,12 @@
  */
 
 package openapi
-// OrderOrderLegCollection struct for OrderOrderLegCollection
-type OrderOrderLegCollection struct {
+// CashAccountOrderLegCollection struct for CashAccountOrderLegCollection
+type CashAccountOrderLegCollection struct {
 	Instruction Instruction `json:"instruction,omitempty"`
 	Instrument InstrumentType `json:"instrument,omitempty"`
 	LegId float32 `json:"legId,omitempty"`
-	OrderLegType OrderType `json:"orderLegType,omitempty"`
+	OrderLegType AssetType `json:"orderLegType,omitempty"`
 	PositionEffect PositionEffect `json:"positionEffect,omitempty"`
 	Quantity float32 `json:"quantity,omitempty"`
 	QuantityType QuantityType `json:"quantityType,omitempty"`

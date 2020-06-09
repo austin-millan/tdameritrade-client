@@ -11,23 +11,23 @@
 package openapi
 // Transaction struct for Transaction
 type Transaction struct {
-	Type string `json:"type,omitempty"`
-	ClearingReferenceNumber string `json:"clearingReferenceNumber,omitempty"`
-	SubAccount string `json:"subAccount,omitempty"`
-	SettlementDate string `json:"settlementDate,omitempty"`
-	OrderId string `json:"orderId,omitempty"`
-	Sma float32 `json:"sma,omitempty"`
-	RequirementReallocationAmount float32 `json:"requirementReallocationAmount,omitempty"`
-	DayTradeBuyingPowerEffect float32 `json:"dayTradeBuyingPowerEffect,omitempty"`
-	NetAmount float32 `json:"netAmount,omitempty"`
-	TransactionDate string `json:"transactionDate,omitempty"`
-	OrderDate string `json:"orderDate,omitempty"`
-	TransactionSubType string `json:"transactionSubType,omitempty"`
-	TransactionId float32 `json:"transactionId,omitempty"`
-	CashBalanceEffectFlag bool `json:"cashBalanceEffectFlag,omitempty"`
-	Description string `json:"description,omitempty"`
-	AchStatus string `json:"achStatus,omitempty"`
 	AccruedInterest float32 `json:"accruedInterest,omitempty"`
+	AchStatus string `json:"achStatus,omitempty"`
+	CashBalanceEffectFlag bool `json:"cashBalanceEffectFlag,omitempty"`
+	ClearingReferenceNumber string `json:"clearingReferenceNumber,omitempty"`
+	DayTradeBuyingPowerEffect float32 `json:"dayTradeBuyingPowerEffect,omitempty"`
+	Description string `json:"description,omitempty"`
 	Fees string `json:"fees,omitempty"`
+	NetAmount float32 `json:"netAmount,omitempty"`
+	OrderDate string `json:"orderDate,omitempty"`
+	OrderId string `json:"orderId,omitempty"`
+	RequirementReallocationAmount float32 `json:"requirementReallocationAmount,omitempty"`
+	SettlementDate string `json:"settlementDate,omitempty"`
+	Sma float32 `json:"sma,omitempty"`
+	SubAccount string `json:"subAccount,omitempty"`
+	TransactionDate string `json:"transactionDate,omitempty"`
+	TransactionId float32 `json:"transactionId,omitempty"`
 	TransactionItem TransactionTransactionItem `json:"transactionItem,omitempty"`
+	TransactionSubType string `json:"transactionSubType,omitempty"`
+	Type string `json:"type,omitempty"`
 }

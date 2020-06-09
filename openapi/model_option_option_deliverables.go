@@ -11,8 +11,8 @@
 package openapi
 // OptionOptionDeliverables struct for OptionOptionDeliverables
 type OptionOptionDeliverables struct {
-	Symbol string `json:"symbol,omitempty"`
-	DeliverableUnits float32 `json:"deliverableUnits,omitempty"`
-	CurrencyType CurrencyType `json:"currencyType,omitempty"`
 	AssetType AssetType `json:"assetType,omitempty"`
+	CurrencyType CurrencyType `json:"currencyType,omitempty"`
+	DeliverableUnits float32 `json:"deliverableUnits,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

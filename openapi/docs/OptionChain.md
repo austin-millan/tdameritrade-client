@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **string** |  | [optional] 
-**Status** | [**OrderStatus**](OrderStatus.md) |  | [optional] 
-**Underlying** | [**OptionChainUnderlying**](OptionChain_underlying.md) |  | [optional] 
-**Strategy** | [**Strategy**](Strategy.md) |  | [optional] 
+**CallExpDateMap** | **string** |  | [optional] 
+**DaysToExpiration** | **float32** |  | [optional] 
+**InterestRate** | **float32** |  | [optional] 
 **Interval** | **float32** |  | [optional] 
 **IsDelayed** | **bool** |  | [optional] 
 **IsIndex** | **bool** |  | [optional] 
-**DaysToExpiration** | **float32** |  | [optional] 
-**InterestRate** | **float32** |  | [optional] 
+**PutExpDateMap** | **string** |  | [optional] 
+**Status** | [**OrderStatus**](OrderStatus.md) |  | [optional] 
+**Strategy** | [**Strategy**](Strategy.md) |  | [optional] 
+**Symbol** | **string** |  | [optional] 
+**Underlying** | [**OptionChainUnderlying**](OptionChain_underlying.md) |  | [optional] 
 **UnderlyingPrice** | **float32** |  | [optional] 
 **Volatility** | **float32** |  | [optional] 
-**CallExpDateMap** | **string** |  | [optional] 
-**PutExpDateMap** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

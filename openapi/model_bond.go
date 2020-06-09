@@ -11,10 +11,10 @@
 package openapi
 // Bond struct for Bond
 type Bond struct {
+	AssetType AssetType `json:"assetType,omitempty"`
 	BondPrice float32 `json:"bondPrice,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
 	Exchange string `json:"exchange,omitempty"`
-	AssetType AssetType `json:"assetType,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

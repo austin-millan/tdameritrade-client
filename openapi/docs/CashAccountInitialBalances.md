@@ -4,24 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AccountValue** | **float32** |  | [optional] 
 **AccruedInterest** | **float32** |  | [optional] 
+**BondValue** | **float32** |  | [optional] 
 **CashAvailableForTrading** | **float32** |  | [optional] 
 **CashAvailableForWithdrawal** | **float32** |  | [optional] 
 **CashBalance** | **float32** |  | [optional] 
-**BondValue** | **float32** |  | [optional] 
+**CashDebitCallValue** | **float32** |  | [optional] 
 **CashReceipts** | **float32** |  | [optional] 
+**IsInCall** | **bool** |  | [optional] 
 **LiquidationValue** | **float32** |  | [optional] 
 **LongOptionMarketValue** | **float32** |  | [optional] 
 **LongStockValue** | **float32** |  | [optional] 
 **MoneyMarketFund** | **float32** |  | [optional] 
 **MutualFundValue** | **float32** |  | [optional] 
+**PendingDeposits** | **float32** |  | [optional] 
 **ShortOptionMarketValue** | **float32** |  | [optional] 
 **ShortStockValue** | **float32** |  | [optional] 
-**IsInCall** | **bool** |  | [optional] 
 **UnsettledCash** | **float32** |  | [optional] 
-**CashDebitCallValue** | **float32** |  | [optional] 
-**PendingDeposits** | **float32** |  | [optional] 
-**AccountValue** | **float32** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

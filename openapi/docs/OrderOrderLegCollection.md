@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderLegType** | [**OrderType**](OrderType.md) |  | [optional] 
-**LegId** | **float32** |  | [optional] 
-**Instrument** | [**InstrumentType**](InstrumentType.md) |  | [optional] 
 **Instruction** | [**Instruction**](Instruction.md) |  | [optional] 
+**Instrument** | [**InstrumentType**](InstrumentType.md) |  | [optional] 
+**LegId** | **float32** |  | [optional] 
+**OrderLegType** | [**OrderType**](OrderType.md) |  | [optional] 
 **PositionEffect** | [**PositionEffect**](PositionEffect.md) |  | [optional] 
 **Quantity** | **float32** |  | [optional] 
 **QuantityType** | [**QuantityType**](QuantityType.md) |  | [optional] 

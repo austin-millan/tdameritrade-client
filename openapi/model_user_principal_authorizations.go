@@ -11,13 +11,13 @@
 package openapi
 // UserPrincipalAuthorizations struct for UserPrincipalAuthorizations
 type UserPrincipalAuthorizations struct {
+	AdvancedMargin bool `json:"advancedMargin,omitempty"`
 	Apex bool `json:"apex,omitempty"`
 	LevelTwoQuotes bool `json:"levelTwoQuotes,omitempty"`
-	StockTrading bool `json:"stockTrading,omitempty"`
 	MarginTrading bool `json:"marginTrading,omitempty"`
-	StreamingNews bool `json:"streamingNews,omitempty"`
 	OptionTradingLevel string `json:"optionTradingLevel,omitempty"`
-	StreamerAccess bool `json:"streamerAccess,omitempty"`
-	AdvancedMargin bool `json:"advancedMargin,omitempty"`
 	ScottradeAccount bool `json:"scottradeAccount,omitempty"`
+	StockTrading bool `json:"stockTrading,omitempty"`
+	StreamerAccess bool `json:"streamerAccess,omitempty"`
+	StreamingNews bool `json:"streamingNews,omitempty"`
 }

@@ -11,41 +11,41 @@
 package openapi
 // Etf struct for Etf
 type Etf struct {
-	Symbol string `json:"symbol,omitempty"`
-	Description string `json:"description,omitempty"`
-	BidPrice float32 `json:"bidPrice,omitempty"`
-	BidSize float32 `json:"bidSize,omitempty"`
-	BidId string `json:"bidId,omitempty"`
-	AskPrice float32 `json:"askPrice,omitempty"`
-	AskSize float32 `json:"askSize,omitempty"`
-	AskId string `json:"askId,omitempty"`
-	LastPrice float32 `json:"lastPrice,omitempty"`
-	LastSize float32 `json:"lastSize,omitempty"`
-	LastId string `json:"lastId,omitempty"`
-	OpenPrice float32 `json:"openPrice,omitempty"`
-	HighPrice float32 `json:"highPrice,omitempty"`
-	LowPrice float32 `json:"lowPrice,omitempty"`
-	ClosePrice float32 `json:"closePrice,omitempty"`
-	NetChange float32 `json:"netChange,omitempty"`
-	TotalVolume float32 `json:"totalVolume,omitempty"`
-	QuoteTimeInLong float32 `json:"quoteTimeInLong,omitempty"`
-	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
-	Mark float32 `json:"mark,omitempty"`
-	Exchange string `json:"exchange,omitempty"`
-	ExchangeName string `json:"exchangeName,omitempty"`
-	Marginable bool `json:"marginable,omitempty"`
-	Shortable bool `json:"shortable,omitempty"`
-	Volatility float32 `json:"volatility,omitempty"`
-	Digits float32 `json:"digits,omitempty"`
 	Var52WkHigh float32 `json:"52WkHigh,omitempty"`
 	Var52WkLow float32 `json:"52WkLow,omitempty"`
-	PeRatio float32 `json:"peRatio,omitempty"`
+	AskId string `json:"askId,omitempty"`
+	AskPrice float32 `json:"askPrice,omitempty"`
+	AskSize float32 `json:"askSize,omitempty"`
+	BidId string `json:"bidId,omitempty"`
+	BidPrice float32 `json:"bidPrice,omitempty"`
+	BidSize float32 `json:"bidSize,omitempty"`
+	ClosePrice float32 `json:"closePrice,omitempty"`
+	Description string `json:"description,omitempty"`
+	Digits float32 `json:"digits,omitempty"`
 	DivAmount float32 `json:"divAmount,omitempty"`
-	DivYield float32 `json:"divYield,omitempty"`
 	DivDate string `json:"divDate,omitempty"`
-	SecurityStatus string `json:"securityStatus,omitempty"`
+	DivYield float32 `json:"divYield,omitempty"`
+	Exchange string `json:"exchange,omitempty"`
+	ExchangeName string `json:"exchangeName,omitempty"`
+	HighPrice float32 `json:"highPrice,omitempty"`
+	LastId string `json:"lastId,omitempty"`
+	LastPrice float32 `json:"lastPrice,omitempty"`
+	LastSize float32 `json:"lastSize,omitempty"`
+	LowPrice float32 `json:"lowPrice,omitempty"`
+	Marginable bool `json:"marginable,omitempty"`
+	Mark float32 `json:"mark,omitempty"`
+	NetChange float32 `json:"netChange,omitempty"`
+	OpenPrice float32 `json:"openPrice,omitempty"`
+	PeRatio float32 `json:"peRatio,omitempty"`
+	QuoteTimeInLong float32 `json:"quoteTimeInLong,omitempty"`
 	RegularMarketLastPrice float32 `json:"regularMarketLastPrice,omitempty"`
 	RegularMarketLastSize float32 `json:"regularMarketLastSize,omitempty"`
 	RegularMarketNetChange float32 `json:"regularMarketNetChange,omitempty"`
 	RegularMarketTradeTimeInLong float32 `json:"regularMarketTradeTimeInLong,omitempty"`
+	SecurityStatus string `json:"securityStatus,omitempty"`
+	Shortable bool `json:"shortable,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	TotalVolume float32 `json:"totalVolume,omitempty"`
+	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
+	Volatility float32 `json:"volatility,omitempty"`
 }

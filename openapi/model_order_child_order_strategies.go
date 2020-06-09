@@ -11,24 +11,24 @@
 package openapi
 // OrderChildOrderStrategies struct for OrderChildOrderStrategies
 type OrderChildOrderStrategies struct {
-	Session Session `json:"session,omitempty"`
-	Duration Duration `json:"duration,omitempty"`
-	OrderType OrderType `json:"orderType,omitempty"`
-	CancelTime OrderCancelTime `json:"cancelTime,omitempty"`
+	CancelTime CashAccountCancelTime `json:"cancelTime,omitempty"`
 	ComplexOrderStrategyType ComplexOrderStrategyType `json:"complexOrderStrategyType,omitempty"`
-	Quantity float32 `json:"quantity,omitempty"`
+	DestinationLinkName string `json:"destinationLinkName,omitempty"`
+	Duration Duration `json:"duration,omitempty"`
 	FilledQuantity float32 `json:"filledQuantity,omitempty"`
+	OrderType OrderType `json:"orderType,omitempty"`
+	Price float32 `json:"price,omitempty"`
+	PriceLinkBasis PriceLinkBasis `json:"priceLinkBasis,omitempty"`
+	PriceLinkType PriceLinkType `json:"priceLinkType,omitempty"`
+	Quantity float32 `json:"quantity,omitempty"`
+	ReleaseTime string `json:"releaseTime,omitempty"`
 	RemainingQuantity float32 `json:"remainingQuantity,omitempty"`
 	RequestedDestination DestinationExchange `json:"requestedDestination,omitempty"`
-	DestinationLinkName string `json:"destinationLinkName,omitempty"`
-	ReleaseTime string `json:"releaseTime,omitempty"`
+	Session Session `json:"session,omitempty"`
 	StopPrice float32 `json:"stopPrice,omitempty"`
 	StopPriceLinkBasis PriceLinkBasis `json:"stopPriceLinkBasis,omitempty"`
 	StopPriceLinkType PriceLinkType `json:"stopPriceLinkType,omitempty"`
 	StopPriceOffset float32 `json:"stopPriceOffset,omitempty"`
 	StopType StopType `json:"stopType,omitempty"`
-	PriceLinkBasis PriceLinkBasis `json:"priceLinkBasis,omitempty"`
-	PriceLinkType PriceLinkType `json:"priceLinkType,omitempty"`
-	Price float32 `json:"price,omitempty"`
 	TaxLotMethod TaxLotMethod `json:"taxLotMethod,omitempty"`
 }

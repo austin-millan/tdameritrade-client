@@ -13,6 +13,6 @@ package openapi
 type Equity struct {
 	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

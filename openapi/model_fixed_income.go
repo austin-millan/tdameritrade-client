@@ -13,9 +13,9 @@ package openapi
 type FixedIncome struct {
 	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
-	MaturityDate string `json:"maturityDate,omitempty"`
-	VariableRate float32 `json:"variableRate,omitempty"`
 	Factor float32 `json:"factor,omitempty"`
+	MaturityDate string `json:"maturityDate,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	VariableRate float32 `json:"variableRate,omitempty"`
 }

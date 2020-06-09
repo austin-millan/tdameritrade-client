@@ -11,9 +11,9 @@
 package openapi
 // Watchlist struct for Watchlist
 type Watchlist struct {
-	Name string `json:"name,omitempty"`
-	WatchlistId string `json:"watchlistId,omitempty"`
 	AccountId string `json:"accountId,omitempty"`
+	Name string `json:"name,omitempty"`
 	Status string `json:"status,omitempty"`
+	WatchlistId string `json:"watchlistId,omitempty"`
 	WatchlistItems []WatchlistWatchlistItems `json:"watchlistItems,omitempty"`
 }

@@ -11,11 +11,11 @@
 package openapi
 // WatchlistWatchlistItems struct for WatchlistWatchlistItems
 type WatchlistWatchlistItems struct {
-	SequenceId float32 `json:"sequenceId,omitempty"`
-	Quantity float32 `json:"quantity,omitempty"`
 	AveragePrice float32 `json:"averagePrice,omitempty"`
 	Commission float32 `json:"commission,omitempty"`
-	PurchasedDate string `json:"purchasedDate,omitempty"`
 	Instrument WatchlistInstrument `json:"instrument,omitempty"`
+	PurchasedDate string `json:"purchasedDate,omitempty"`
+	Quantity float32 `json:"quantity,omitempty"`
+	SequenceId float32 `json:"sequenceId,omitempty"`
 	Status string `json:"status,omitempty"`
 }

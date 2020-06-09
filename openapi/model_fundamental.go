@@ -11,10 +11,10 @@
 package openapi
 // Fundamental struct for Fundamental
 type Fundamental struct {
+	AssetType AssetType `json:"assetType,omitempty"`
 	Cusip string `json:"cusip,omitempty"`
-	Symbol string `json:"symbol,omitempty"`
 	Description string `json:"description,omitempty"`
 	Exchange string `json:"exchange,omitempty"`
-	AssetType AssetType `json:"assetType,omitempty"`
 	Fundamental FundamentalFundamental `json:"fundamental,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
 }

@@ -11,21 +11,21 @@
 package openapi
 // MutualFund struct for MutualFund
 type MutualFund struct {
-	Symbol string `json:"symbol,omitempty"`
-	Description string `json:"description,omitempty"`
-	ClosePrice float32 `json:"closePrice,omitempty"`
-	NetChange float32 `json:"netChange,omitempty"`
-	TotalVolume float32 `json:"totalVolume,omitempty"`
-	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
-	Exchange string `json:"exchange,omitempty"`
-	ExchangeName string `json:"exchangeName,omitempty"`
-	Digits float32 `json:"digits,omitempty"`
 	Var52WkHigh float32 `json:"52WkHigh,omitempty"`
 	Var52WkLow float32 `json:"52WkLow,omitempty"`
-	NAV float32 `json:"nAV,omitempty"`
-	PeRatio float32 `json:"peRatio,omitempty"`
+	ClosePrice float32 `json:"closePrice,omitempty"`
+	Description string `json:"description,omitempty"`
+	Digits float32 `json:"digits,omitempty"`
 	DivAmount float32 `json:"divAmount,omitempty"`
-	DivYield float32 `json:"divYield,omitempty"`
 	DivDate string `json:"divDate,omitempty"`
+	DivYield float32 `json:"divYield,omitempty"`
+	Exchange string `json:"exchange,omitempty"`
+	ExchangeName string `json:"exchangeName,omitempty"`
+	NAV float32 `json:"nAV,omitempty"`
+	NetChange float32 `json:"netChange,omitempty"`
+	PeRatio float32 `json:"peRatio,omitempty"`
 	SecurityStatus string `json:"securityStatus,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	TotalVolume float32 `json:"totalVolume,omitempty"`
+	TradeTimeInLong float32 `json:"tradeTimeInLong,omitempty"`
 }

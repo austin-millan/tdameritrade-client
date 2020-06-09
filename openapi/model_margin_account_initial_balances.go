@@ -11,18 +11,20 @@
 package openapi
 // MarginAccountInitialBalances struct for MarginAccountInitialBalances
 type MarginAccountInitialBalances struct {
+	AccountValue float32 `json:"accountValue,omitempty"`
 	AccruedInterest float32 `json:"accruedInterest,omitempty"`
 	AvailableFundsNonMarginableTrade float32 `json:"availableFundsNonMarginableTrade,omitempty"`
 	BondValue float32 `json:"bondValue,omitempty"`
 	BuyingPower float32 `json:"buyingPower,omitempty"`
-	CashBalance float32 `json:"cashBalance,omitempty"`
 	CashAvailableForTrading float32 `json:"cashAvailableForTrading,omitempty"`
+	CashBalance float32 `json:"cashBalance,omitempty"`
 	CashReceipts float32 `json:"cashReceipts,omitempty"`
 	DayTradingBuyingPower float32 `json:"dayTradingBuyingPower,omitempty"`
 	DayTradingBuyingPowerCall float32 `json:"dayTradingBuyingPowerCall,omitempty"`
 	DayTradingEquityCall float32 `json:"dayTradingEquityCall,omitempty"`
 	Equity float32 `json:"equity,omitempty"`
 	EquityPercentage float32 `json:"equityPercentage,omitempty"`
+	IsInCall bool `json:"isInCall,omitempty"`
 	LiquidationValue float32 `json:"liquidationValue,omitempty"`
 	LongMarginValue float32 `json:"longMarginValue,omitempty"`
 	LongOptionMarketValue float32 `json:"longOptionMarketValue,omitempty"`
@@ -30,18 +32,16 @@ type MarginAccountInitialBalances struct {
 	MaintenanceCall float32 `json:"maintenanceCall,omitempty"`
 	MaintenanceRequirement float32 `json:"maintenanceRequirement,omitempty"`
 	Margin float32 `json:"margin,omitempty"`
+	MarginBalance float32 `json:"marginBalance,omitempty"`
 	MarginEquity float32 `json:"marginEquity,omitempty"`
 	MoneyMarketFund float32 `json:"moneyMarketFund,omitempty"`
 	MutualFundValue float32 `json:"mutualFundValue,omitempty"`
+	PendingDeposits float32 `json:"pendingDeposits,omitempty"`
 	RegTCall float32 `json:"regTCall,omitempty"`
+	ShortBalance float32 `json:"shortBalance,omitempty"`
 	ShortMarginValue float32 `json:"shortMarginValue,omitempty"`
 	ShortOptionMarketValue float32 `json:"shortOptionMarketValue,omitempty"`
 	ShortStockValue float32 `json:"shortStockValue,omitempty"`
 	TotalCash float32 `json:"totalCash,omitempty"`
-	IsInCall bool `json:"isInCall,omitempty"`
 	UnsettledCash float32 `json:"unsettledCash,omitempty"`
-	PendingDeposits float32 `json:"pendingDeposits,omitempty"`
-	MarginBalance float32 `json:"marginBalance,omitempty"`
-	ShortBalance float32 `json:"shortBalance,omitempty"`
-	AccountValue float32 `json:"accountValue,omitempty"`
 }

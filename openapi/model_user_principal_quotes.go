@@ -11,11 +11,11 @@
 package openapi
 // UserPrincipalQuotes struct for UserPrincipalQuotes
 type UserPrincipalQuotes struct {
-	IsNyseDelayed bool `json:"isNyseDelayed,omitempty"`
-	IsNasdaqDelayed bool `json:"isNasdaqDelayed,omitempty"`
-	IsOpraDelayed bool `json:"isOpraDelayed,omitempty"`
 	IsAmexDelayed bool `json:"isAmexDelayed,omitempty"`
 	IsCmeDelayed bool `json:"isCmeDelayed,omitempty"`
-	IsIceDelayed bool `json:"isIceDelayed,omitempty"`
 	IsForexDelayed bool `json:"isForexDelayed,omitempty"`
+	IsIceDelayed bool `json:"isIceDelayed,omitempty"`
+	IsNasdaqDelayed bool `json:"isNasdaqDelayed,omitempty"`
+	IsNyseDelayed bool `json:"isNyseDelayed,omitempty"`
+	IsOpraDelayed bool `json:"isOpraDelayed,omitempty"`
 }

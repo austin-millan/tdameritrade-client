@@ -11,14 +11,14 @@
 package openapi
 // MarginAccount struct for MarginAccount
 type MarginAccount struct {
-	Type string `json:"type,omitempty"`
 	AccountId string `json:"accountId,omitempty"`
-	RoundTrips float32 `json:"roundTrips,omitempty"`
-	IsDayTrader bool `json:"isDayTrader,omitempty"`
-	IsClosingOnlyRestricted bool `json:"isClosingOnlyRestricted,omitempty"`
-	Positions []CashAccountPositions `json:"positions,omitempty"`
-	OrderStrategies []MarginAccountOrderStrategies `json:"orderStrategies,omitempty"`
-	InitialBalances MarginAccountInitialBalances `json:"initialBalances,omitempty"`
 	CurrentBalances MarginAccountCurrentBalances `json:"currentBalances,omitempty"`
+	InitialBalances MarginAccountInitialBalances `json:"initialBalances,omitempty"`
+	IsClosingOnlyRestricted bool `json:"isClosingOnlyRestricted,omitempty"`
+	IsDayTrader bool `json:"isDayTrader,omitempty"`
+	OrderStrategies []MarginAccountOrderStrategies `json:"orderStrategies,omitempty"`
+	Positions []CashAccountPositions `json:"positions,omitempty"`
 	ProjectedBalances MarginAccountCurrentBalances `json:"projectedBalances,omitempty"`
+	RoundTrips float32 `json:"roundTrips,omitempty"`
+	Type string `json:"type,omitempty"`
 }

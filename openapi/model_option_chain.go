@@ -11,17 +11,17 @@
 package openapi
 // OptionChain struct for OptionChain
 type OptionChain struct {
-	Symbol string `json:"symbol,omitempty"`
-	Status OrderStatus `json:"status,omitempty"`
-	Underlying OptionChainUnderlying `json:"underlying,omitempty"`
-	Strategy Strategy `json:"strategy,omitempty"`
+	CallExpDateMap string `json:"callExpDateMap,omitempty"`
+	DaysToExpiration float32 `json:"daysToExpiration,omitempty"`
+	InterestRate float32 `json:"interestRate,omitempty"`
 	Interval float32 `json:"interval,omitempty"`
 	IsDelayed bool `json:"isDelayed,omitempty"`
 	IsIndex bool `json:"isIndex,omitempty"`
-	DaysToExpiration float32 `json:"daysToExpiration,omitempty"`
-	InterestRate float32 `json:"interestRate,omitempty"`
+	PutExpDateMap string `json:"putExpDateMap,omitempty"`
+	Status OrderStatus `json:"status,omitempty"`
+	Strategy Strategy `json:"strategy,omitempty"`
+	Symbol string `json:"symbol,omitempty"`
+	Underlying OptionChainUnderlying `json:"underlying,omitempty"`
 	UnderlyingPrice float32 `json:"underlyingPrice,omitempty"`
 	Volatility float32 `json:"volatility,omitempty"`
-	CallExpDateMap string `json:"callExpDateMap,omitempty"`
-	PutExpDateMap string `json:"putExpDateMap,omitempty"`
 }
