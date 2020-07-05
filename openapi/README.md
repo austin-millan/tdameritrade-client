@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [OrderStrategyType](docs/OrderStrategyType.md)
  - [OrderType](docs/OrderType.md)
  - [PositionEffect](docs/PositionEffect.md)
+ - [PostAccessTokenRequest](docs/PostAccessTokenRequest.md)
  - [Preferences](docs/Preferences.md)
  - [PriceLinkBasis](docs/PriceLinkBasis.md)
  - [PriceLinkType](docs/PriceLinkType.md)
@@ -171,14 +172,14 @@ Class | Method | HTTP request | Description
 
 ## Bearer
 
-- **Type**: API key
+- **Type**: HTTP basic authentication
 
 Example
 
 ```golang
-auth := context.WithValue(context.Background(), sw.ContextAPIKey, sw.APIKey{
-    Key: "APIKEY",
-    Prefix: "Bearer", // Omit if not necessary.
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
 })
 r, err := client.Service.Operation(auth, args)
 ```

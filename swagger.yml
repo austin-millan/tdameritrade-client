@@ -335,14 +335,6 @@ paths:
           schema:
             type: integer
             format: string
-        - name: orderId
-          in: path
-          description: Order Number
-          required: true
-          schema:
-            type: integer
-            format: int64
-            maximum: 0
       requestBody:
         content:
           application/json:
@@ -551,7 +543,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EASObject"
+              $ref: "#/components/schemas/PostAccessTokenRequest"
         description: The access token.
       responses:
         "200":
@@ -1556,7 +1548,6 @@ paths:
           description: An error message indicating there was an unexpected server error.
       security:
         - Bearer: []
-
   /accounts/watchlists:
     get:
       tags:
@@ -1590,9 +1581,9 @@ components:
       description: The order to place.
   securitySchemes:
     Bearer:
-      type: apiKey
-      name: Authorization
-      in: header
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Account:
       properties:
@@ -2133,6 +2124,31 @@ components:
         - FILL_OR_KILL
       example: '''DAY'' or ''GOOD_TILL_CANCEL'' or ''FILL_OR_KILL'''
       type: string
+    PostAccessTokenRequest:
+      properties:
+        grant_type:
+          default: authorization_code
+          type: string
+          enum:
+            - authorization_code
+            - refresh_token
+          example: authorization_code
+          description: The grant type of the oAuth scheme. Possible values are authorization_code, refresh_token 
+        refresh_token:
+          description: Required if using refresh token grant
+          type: string
+        access_type:
+          description:  Set to offline to receive a refresh token on an authorization_code grant type request. Do not set to offline on a refresh_token grant type request. 
+          type: string
+        code:
+          type: string
+          description: Required if trying to use authorization code grant 
+        client_id:
+          description: OAuth User ID of your application 
+          type: string
+        redirect_uri:
+          description:  Required if trying to use authorization code grant 
+          type: string
     EASObject:
       properties:
         access_token:
