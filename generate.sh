@@ -6,23 +6,19 @@ docker run \
     --rm \
     --user $(id -u):$(id -g) \
     -v ${PWD}:/local \
-    openapitools/openapi-generator-cli generate \
+    openapitools/openapi-generator-cli:v5.0.0 generate \
         -i /local/swagger.yml \
         -g go \
-        -o /local/openapi \
+        -o /local/models \
         -p enumClassPrefix=true \
         -p skipFormModel=true
-rm openapi/api_*.go \
-    openapi/.travis.yml \
-    openapi/client.go \
-    openapi/configuration.go \
-    openapi/git_push.sh \
-    openapi/go.mod \
-    openapi/go.sum \
-    openapi/response.go \
-    openapi/api/openapi.yaml \
-    openapi/docs/*Api.md
-
-echo "module gitlab.com/brokerage-api/tdameritrade-openapi
-go 1.13" > go.mod
-
+rm models/api_*.go \
+    models/.travis.yml \
+    models/client.go \
+    models/configuration.go \
+    models/git_push.sh \
+    models/go.mod \
+    models/go.sum \
+    models/response.go \
+    models/api/openapi.yaml \
+    models/docs/*Api.md

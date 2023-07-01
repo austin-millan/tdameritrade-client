@@ -5,7 +5,7 @@ info:
   title: TD Ameritrade API
   termsOfService: https://developer.tdameritrade.com/legal
   contact:
-    email: austin.millan@gmail.com
+    email: austin.millan@protonmail.com
 servers:
   - url: https://api.tdameritrade.com/v2
   - url: http://api.tdameritrade.com/v2
